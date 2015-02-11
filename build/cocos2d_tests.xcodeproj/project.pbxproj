@@ -61,7 +61,6 @@
 		15C64829165F396B007D4F18 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C64828165F396B007D4F18 /* OpenAL.framework */; };
 		15C6482B165F3979007D4F18 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C6482A165F3979007D4F18 /* ApplicationServices.framework */; };
 		15C6482D165F3988007D4F18 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C6482C165F3988007D4F18 /* AudioToolbox.framework */; };
-		15C6482F165F399D007D4F18 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C6482E165F399D007D4F18 /* libz.dylib */; };
 		15C64833165F3AFD007D4F18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C64832165F3AFD007D4F18 /* Foundation.framework */; };
 		15CBA9AF196EE80B005877BB /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 3E6177F01960FEFE00DE83F5 /* fonts */; };
 		15CBA9B0196EE80B005877BB /* ipad in Resources */ = {isa = PBXBuildFile; fileRef = 3E6177F11960FEFE00DE83F5 /* ipad */; };
@@ -2157,7 +2156,6 @@
 			files = (
 				1AAF534D180E2F4E000584C8 /* libcocos2d Mac.a in Frameworks */,
 				EDCC747F17C455FD007B692C /* IOKit.framework in Frameworks */,
-				15C6482F165F399D007D4F18 /* libz.dylib in Frameworks */,
 				15C64833165F3AFD007D4F18 /* Foundation.framework in Frameworks */,
 				15C6482D165F3988007D4F18 /* AudioToolbox.framework in Frameworks */,
 				15C6482B165F3979007D4F18 /* ApplicationServices.framework in Frameworks */,
@@ -6139,7 +6137,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/cpp-empty-test/proj.mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/glfw3/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include";
 			};
 			name = Debug;
 		};
@@ -6153,7 +6151,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/cpp-empty-test/proj.mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/glfw3/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -6368,7 +6366,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/cpp-tests/proj.mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/glfw3/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include";
 			};
 			name = Debug;
 		};
@@ -6383,7 +6381,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/cpp-tests/proj.mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/glfw3/include/mac";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -6649,7 +6647,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../ $(SRCROOT)/../cocos $(SRCROOT)/../cocos/base $(SRCROOT)/../cocos/physics $(SRCROOT)/../cocos/math/kazmath $(SRCROOT)/../cocos/2d $(SRCROOT)/../cocos/gui $(SRCROOT)/../cocos/network $(SRCROOT)/../cocos/audio/include $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../extensions $(SRCROOT)/../external $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../cocos/scripting/js-bindings/auto $(SRCROOT)/../cocos/scripting/js-bindings/manual";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../ $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support";
 			};
 			name = Debug;
 		};
@@ -6676,7 +6674,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../ $(SRCROOT)/../cocos $(SRCROOT)/../cocos/base $(SRCROOT)/../cocos/physics $(SRCROOT)/../cocos/math/kazmath $(SRCROOT)/../cocos/2d $(SRCROOT)/../cocos/gui $(SRCROOT)/../cocos/network $(SRCROOT)/../cocos/audio/include $(SRCROOT)/../cocos/editor-support $(SRCROOT)/../extensions $(SRCROOT)/../external $(SRCROOT)/../external/chipmunk/include/chipmunk $(SRCROOT)/../cocos/scripting/js-bindings/auto $(SRCROOT)/../cocos/scripting/js-bindings/manual";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../ $(SRCROOT)/../cocos $(SRCROOT)/../cocos/editor-support";
 			};
 			name = Release;
 		};

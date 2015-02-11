@@ -5,6 +5,7 @@
 //
 
 #include "ChipmunkTest.h"
+#include "chipmunk/chipmunk.h"
 
 
 enum {

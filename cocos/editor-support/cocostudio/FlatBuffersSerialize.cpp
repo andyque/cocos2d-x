@@ -26,7 +26,6 @@
 
 #include "base/ObjectFactory.h"
 #include "ui/CocosGUI.h"
-#include "cocostudio/CocoStudio.h"
 #include "CSParseBinary_generated.h"
 
 #include "WidgetReader/NodeReaderProtocol.h"
@@ -54,9 +53,9 @@
 #include "WidgetReader/PageViewReader/PageViewReader.h"
 #include "WidgetReader/ListViewReader/ListViewReader.h"
 
-#include "tinyxml2.h"
-#include "flatbuffers/flatbuffers.h"
-#include "flatbuffers/util.h"
+#include "tinyxml2/tinyxml2.h"
+#include "flatbuffer/flatbuffers.h"
+#include "flatbuffer/util.h"
 
 
 

@@ -28,8 +28,8 @@
 #include "cocostudio/CSParseBinary_generated.h"
 #include "cocostudio/WidgetReader/NodeReader/NodeReader.h"
 
-#include "tinyxml2.h"
-#include "flatbuffers/flatbuffers.h"
+#include "tinyxml2/tinyxml2.h"
+#include "flatbuffer/flatbuffers.h"
 
 USING_NS_CC;
 using namespace flatbuffers;

@@ -1,4 +1,5 @@
 
+#include "controller.h"
 // C++ includes
 #include <map>
 #include <functional>
@@ -8,9 +9,10 @@
 // test inclues
 #include "AppDelegate.h"
 #include "BaseTest.h"
-#include "controller.h"
 #include "testResource.h"
 #include "tests.h"
+#include "cocostudio/CocoStudio.h"
+#include "UITest/UITest.h"
 
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32) && (CC_TARGET_PLATFORM != CC_PLATFORM_WP8) && (CC_TARGET_PLATFORM != CC_PLATFORM_WINRT)
 #include <unistd.h>
@@ -21,8 +23,6 @@
 #include <io.h>
 #include <WS2tcpip.h>
 #endif
-#include "cocostudio/CocoStudio.h"
-#include "UITest/UITest.h"
 
 typedef struct _Controller{
 	const char *test_name;

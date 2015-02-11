@@ -31,7 +31,7 @@
 
 #include "base/CCDirector.h"
 
-#include "xxhash.h"
+#include "xxhash/xxhash.h"
 
 NS_CC_BEGIN
 

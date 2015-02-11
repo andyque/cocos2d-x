@@ -3,7 +3,7 @@
 #ifndef FLATBUFFERS_GENERATED_CSARMATURENODE_FLATBUFFERS_H_
 #define FLATBUFFERS_GENERATED_CSARMATURENODE_FLATBUFFERS_H_
 
-#include "flatbuffers/flatbuffers.h"
+#include "flatbuffer/flatbuffers.h"
 
 
 namespace flatbuffers {
