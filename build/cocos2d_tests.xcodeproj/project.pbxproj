@@ -704,6 +704,7 @@
 		295824591987415900F9746D /* UIScale9SpriteTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295824571987415900F9746D /* UIScale9SpriteTest.cpp */; };
 		2958245A1987415900F9746D /* UIScale9SpriteTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295824571987415900F9746D /* UIScale9SpriteTest.cpp */; };
 		298D7F6F19AC31F300FF096D /* UIWebViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 298D7F6D19AC31F300FF096D /* UIWebViewTest.cpp */; };
+		29AC14A61A8BC84C002DEB6D /* libbox2d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14A51A8BC84C002DEB6D /* libbox2d.a */; };
 		29AFEF6719ACCAA000F6B10A /* Test.html in Resources */ = {isa = PBXBuildFile; fileRef = 29AFEF6619ACCAA000F6B10A /* Test.html */; };
 		29FBBBFE196A9ECD00E65826 /* CocostudioParserJsonTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29FBBBFC196A9ECD00E65826 /* CocostudioParserJsonTest.cpp */; };
 		29FBBBFF196A9ECD00E65826 /* CocostudioParserJsonTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29FBBBFC196A9ECD00E65826 /* CocostudioParserJsonTest.cpp */; };
@@ -1855,6 +1856,7 @@
 		295824581987415900F9746D /* UIScale9SpriteTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScale9SpriteTest.h; sourceTree = "<group>"; };
 		298D7F6D19AC31F300FF096D /* UIWebViewTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UIWebViewTest.cpp; path = UIWebViewTest/UIWebViewTest.cpp; sourceTree = "<group>"; };
 		298D7F6E19AC31F300FF096D /* UIWebViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewTest.h; path = UIWebViewTest/UIWebViewTest.h; sourceTree = "<group>"; };
+		29AC14A51A8BC84C002DEB6D /* libbox2d.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbox2d.a; path = "../external/mac/x86-64/libs/libbox2d.a"; sourceTree = "<group>"; };
 		29AFEF6619ACCAA000F6B10A /* Test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Test.html; path = "../tests/cpp-tests/Resources/Test.html"; sourceTree = "<group>"; };
 		29FBBBFC196A9ECD00E65826 /* CocostudioParserJsonTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocostudioParserJsonTest.cpp; sourceTree = "<group>"; };
 		29FBBBFD196A9ECD00E65826 /* CocostudioParserJsonTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocostudioParserJsonTest.h; sourceTree = "<group>"; };
@@ -2157,6 +2159,7 @@
 				1AAF534D180E2F4E000584C8 /* libcocos2d Mac.a in Frameworks */,
 				EDCC747F17C455FD007B692C /* IOKit.framework in Frameworks */,
 				15C64833165F3AFD007D4F18 /* Foundation.framework in Frameworks */,
+				29AC14A61A8BC84C002DEB6D /* libbox2d.a in Frameworks */,
 				15C6482D165F3988007D4F18 /* AudioToolbox.framework in Frameworks */,
 				15C6482B165F3979007D4F18 /* ApplicationServices.framework in Frameworks */,
 				15C64829165F396B007D4F18 /* OpenAL.framework in Frameworks */,
@@ -3974,6 +3977,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29AC14A51A8BC84C002DEB6D /* libbox2d.a */,
 				AC1C8B6E1A7F6FA8006DCCB1 /* AVFoundation.framework */,
 				AC1C8B6C1A7F6FA0006DCCB1 /* UIKit.framework */,
 				AC1C8B6A1A7F6F99006DCCB1 /* OpenGLES.framework */,
@@ -6363,9 +6367,11 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					CC_TARGET_OS_MAC,
+					"CC_ENABLE_BOX2D_INTEGRATION=1",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/cpp-tests/proj.mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include";
 			};
 			name = Debug;
@@ -6381,6 +6387,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/cpp-tests/proj.mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include";
 				VALIDATE_PRODUCT = YES;
 			};

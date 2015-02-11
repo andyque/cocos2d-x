@@ -6214,7 +6214,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../external/mac/x86-64/libs",
-					"/Users/guanghui/cocos2d-x/external/mac/x86-64/libs",
 				);
 				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";
@@ -6245,7 +6244,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../external/mac/x86-64/libs",
-					"/Users/guanghui/cocos2d-x/external/mac/x86-64/libs",
 				);
 				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "";

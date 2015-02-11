@@ -5,7 +5,7 @@
 //
 
 #include "ChipmunkTest.h"
-#include "chipmunk/chipmunk.h"
+
 
 
 enum {
@@ -256,4 +256,5 @@ void ChipmunkAccelTouchTestScene::runThisTest()
 
     Director::getInstance()->replaceScene(this);
 }
+
 
