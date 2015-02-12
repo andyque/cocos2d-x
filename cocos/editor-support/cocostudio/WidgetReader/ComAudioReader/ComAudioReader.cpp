@@ -29,7 +29,7 @@
 #include "cocostudio/WidgetReader/NodeReader/NodeReader.h"
 
 #include "tinyxml2/tinyxml2.h"
-#include "flatbuffer/flatbuffers.h"
+#include "flatbuffers/flatbuffers.h"
 
 USING_NS_CC;
 using namespace flatbuffers;

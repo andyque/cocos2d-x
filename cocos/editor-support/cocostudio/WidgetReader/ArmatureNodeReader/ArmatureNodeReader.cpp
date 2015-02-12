@@ -1,5 +1,5 @@
 #include "tinyxml2/tinyxml2.h"
-#include "flatbuffer/flatbuffers.h"
+#include "flatbuffers/flatbuffers.h"
 #include "cocostudio/WidgetReader/NodeReader/NodeReader.h"
 #include "cocostudio/CSParseBinary_generated.h"
 #include "CSArmatureNode_generated.h"

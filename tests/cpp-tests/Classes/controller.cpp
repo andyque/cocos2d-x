@@ -1,5 +1,6 @@
 
 #include "controller.h"
+#include "tests.h"
 // C++ includes
 #include <map>
 #include <functional>
@@ -10,7 +11,6 @@
 #include "AppDelegate.h"
 #include "BaseTest.h"
 #include "testResource.h"
-#include "tests.h"
 #include "cocostudio/CocoStudio.h"
 #include "UITest/UITest.h"
 

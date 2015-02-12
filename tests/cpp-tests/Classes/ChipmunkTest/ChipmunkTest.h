@@ -4,7 +4,7 @@
 #ifndef __CHIPMUNKTEST_H__
 #define __CHIPMUNKTEST_H__
 //FIXME:  chipmunk/chipmunk.h must comes before 2d/CCLayer.h
-#include "chipmunk/chipmunk.h"
+
 #include "../testBasic.h"
 #include "extensions/cocos-ext.h"
 #include "2d/CCLayer.h"
