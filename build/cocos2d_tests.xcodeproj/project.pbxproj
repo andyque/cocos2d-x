@@ -717,7 +717,6 @@
 		29AC14F91A8C745D002DEB6D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1C8B5C1A7F6F4E006DCCB1 /* CoreMotion.framework */; };
 		29AC14FA1A8C748D002DEB6D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1C8B541A7F6ECA006DCCB1 /* MediaPlayer.framework */; };
 		29AC14FE1A8C77B1002DEB6D /* libxxtea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14FD1A8C77B0002DEB6D /* libxxtea.a */; };
-		29AC15001A8C7C7D002DEB6D /* libjs_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14FF1A8C7C7D002DEB6D /* libjs_static.a */; };
 		29AC15011A8C7CF5002DEB6D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1C8B5E1A7F6F58006DCCB1 /* libz.dylib */; };
 		29AFEF6719ACCAA000F6B10A /* Test.html in Resources */ = {isa = PBXBuildFile; fileRef = 29AFEF6619ACCAA000F6B10A /* Test.html */; };
 		29FBBBFE196A9ECD00E65826 /* CocostudioParserJsonTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29FBBBFC196A9ECD00E65826 /* CocostudioParserJsonTest.cpp */; };
@@ -2146,7 +2145,6 @@
 				AC1C8B831A7F7944006DCCB1 /* libcocos2d iOS.a in Frameworks */,
 				AC1C8B841A7F7944006DCCB1 /* libjscocos2d iOS.a in Frameworks */,
 				AC1C8B781A7F6FFC006DCCB1 /* FacebookSDK.framework in Frameworks */,
-				29AC15001A8C7C7D002DEB6D /* libjs_static.a in Frameworks */,
 				AC1C8B6F1A7F6FA8006DCCB1 /* AVFoundation.framework in Frameworks */,
 				AC1C8B6D1A7F6FA0006DCCB1 /* UIKit.framework in Frameworks */,
 				AC1C8B6B1A7F6F99006DCCB1 /* OpenGLES.framework in Frameworks */,

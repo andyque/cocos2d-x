@@ -137,6 +137,7 @@
 		1AB5E63518D05BF30088DAA4 /* jsb_cocos2dx_ui_manual.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AB5E63218D05BF30088DAA4 /* jsb_cocos2dx_ui_manual.h */; };
 		1AB5E63618D05BF30088DAA4 /* jsb_cocos2dx_ui_manual.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AB5E63218D05BF30088DAA4 /* jsb_cocos2dx_ui_manual.h */; };
 		29AC14C11A8C5941002DEB6D /* libjs_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C01A8C5941002DEB6D /* libjs_static.a */; };
+		29AC15151A8CA27C002DEB6D /* libjs_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC15141A8CA27C002DEB6D /* libjs_static.a */; };
 		83A5661918DA878400FC31A0 /* jsb_socketio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A5661718DA878400FC31A0 /* jsb_socketio.cpp */; };
 		83A5661A18DA878400FC31A0 /* jsb_socketio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83A5661718DA878400FC31A0 /* jsb_socketio.cpp */; };
 		83A5661B18DA878400FC31A0 /* jsb_socketio.h in Headers */ = {isa = PBXBuildFile; fileRef = 83A5661818DA878400FC31A0 /* jsb_socketio.h */; };
@@ -216,6 +217,7 @@
 		1AB5E63118D05BF30088DAA4 /* jsb_cocos2dx_ui_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_ui_manual.cpp; sourceTree = "<group>"; };
 		1AB5E63218D05BF30088DAA4 /* jsb_cocos2dx_ui_manual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsb_cocos2dx_ui_manual.h; sourceTree = "<group>"; };
 		29AC14C01A8C5941002DEB6D /* libjs_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjs_static.a; path = "../../../../external/mac/x86-64/libs/libjs_static.a"; sourceTree = "<group>"; };
+		29AC15141A8CA27C002DEB6D /* libjs_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjs_static.a; path = "../../../../templates/js-template-default/frameworks/cocos2d-x/external/ios/libs/libjs_static.a"; sourceTree = "<group>"; };
 		83A5661718DA878400FC31A0 /* jsb_socketio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_socketio.cpp; sourceTree = "<group>"; };
 		83A5661818DA878400FC31A0 /* jsb_socketio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsb_socketio.h; sourceTree = "<group>"; };
 		FAFF169B1A6FBC5200A8CD43 /* jsb_cocos2dx_studio_conversions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = jsb_cocos2dx_studio_conversions.cpp; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AC15151A8CA27C002DEB6D /* libjs_static.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +257,8 @@
 		1551A334158F2AB200E66CFE = {
 			isa = PBXGroup;
 			children = (
-				29AC14C01A8C5941002DEB6D /* libjs_static.a */,
+				29AC15171A8CA2BE002DEB6D /* ios */,
+				29AC15161A8CA2B4002DEB6D /* mac */,
 				1A119E2E18BDF19200352BAA /* auto */,
 				1A5410A518B785A10016A3AF /* libjscocos2d iOS.a */,
 				1A5410A418B785A10016A3AF /* libjscocos2d Mac.a */,
@@ -408,6 +412,22 @@
 				1AB5E63218D05BF30088DAA4 /* jsb_cocos2dx_ui_manual.h */,
 			);
 			path = ui;
+			sourceTree = "<group>";
+		};
+		29AC15161A8CA2B4002DEB6D /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				29AC14C01A8C5941002DEB6D /* libjs_static.a */,
+			);
+			name = mac;
+			sourceTree = "<group>";
+		};
+		29AC15171A8CA2BE002DEB6D /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				29AC15141A8CA27C002DEB6D /* libjs_static.a */,
+			);
+			name = ios;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
