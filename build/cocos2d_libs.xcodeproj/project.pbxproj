@@ -978,6 +978,28 @@
 		29AC14971A8BB8A5002DEB6D /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14821A8BB8A5002DEB6D /* libz.a */; };
 		29AC14991A8BB909002DEB6D /* libtinyxml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14981A8BB909002DEB6D /* libtinyxml2.a */; };
 		29AC149B1A8BB974002DEB6D /* libglfw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC149A1A8BB974002DEB6D /* libglfw.a */; };
+		29AC14D81A8C5E75002DEB6D /* libchipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C21A8C5E75002DEB6D /* libchipmunk.a */; };
+		29AC14D91A8C5E75002DEB6D /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C31A8C5E75002DEB6D /* libcjson.a */; };
+		29AC14DA1A8C5E75002DEB6D /* libconvertutf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C41A8C5E75002DEB6D /* libconvertutf.a */; };
+		29AC14DB1A8C5E75002DEB6D /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C51A8C5E75002DEB6D /* libcrypto.a */; };
+		29AC14DC1A8C5E75002DEB6D /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C61A8C5E75002DEB6D /* libcurl.a */; };
+		29AC14DD1A8C5E75002DEB6D /* libedtaa3func.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C71A8C5E75002DEB6D /* libedtaa3func.a */; };
+		29AC14DE1A8C5E75002DEB6D /* libflatbuffers.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C81A8C5E75002DEB6D /* libflatbuffers.a */; };
+		29AC14DF1A8C5E75002DEB6D /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14C91A8C5E75002DEB6D /* libfreetype.a */; };
+		29AC14E01A8C5E75002DEB6D /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14CA1A8C5E75002DEB6D /* libjpeg.a */; };
+		29AC14E11A8C5E75002DEB6D /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14CB1A8C5E75002DEB6D /* liblua.a */; };
+		29AC14E21A8C5E75002DEB6D /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14CC1A8C5E75002DEB6D /* libluajit.a */; };
+		29AC14E31A8C5E75002DEB6D /* libluasocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14CD1A8C5E75002DEB6D /* libluasocket.a */; };
+		29AC14E41A8C5E75002DEB6D /* libminizip.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14CE1A8C5E75002DEB6D /* libminizip.a */; };
+		29AC14E51A8C5E75002DEB6D /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14CF1A8C5E75002DEB6D /* libpng.a */; };
+		29AC14E61A8C5E76002DEB6D /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14D01A8C5E75002DEB6D /* libssl.a */; };
+		29AC14E71A8C5E76002DEB6D /* libtiff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14D11A8C5E75002DEB6D /* libtiff.a */; };
+		29AC14E81A8C5E76002DEB6D /* libtinyxml2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14D21A8C5E75002DEB6D /* libtinyxml2.a */; };
+		29AC14E91A8C5E76002DEB6D /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14D31A8C5E75002DEB6D /* libwebp.a */; };
+		29AC14EA1A8C5E76002DEB6D /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14D41A8C5E75002DEB6D /* libwebsockets.a */; };
+		29AC14EB1A8C5E76002DEB6D /* libxxhash.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14D51A8C5E75002DEB6D /* libxxhash.a */; };
+		29AC14EC1A8C5E76002DEB6D /* libxxtea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14D61A8C5E75002DEB6D /* libxxtea.a */; };
+		29AC14ED1A8C5E76002DEB6D /* libz.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14D71A8C5E75002DEB6D /* libz.a */; };
 		382384031A259005002C4610 /* CSParseBinary_generated.h in Headers */ = {isa = PBXBuildFile; fileRef = 382384021A259005002C4610 /* CSParseBinary_generated.h */; };
 		382384041A259005002C4610 /* CSParseBinary_generated.h in Headers */ = {isa = PBXBuildFile; fileRef = 382384021A259005002C4610 /* CSParseBinary_generated.h */; };
 		382384071A25900F002C4610 /* FlatBuffersSerialize.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 382384051A25900F002C4610 /* FlatBuffersSerialize.cpp */; };
@@ -2161,6 +2183,28 @@
 		29AC14821A8BB8A5002DEB6D /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = "../external/mac/x86-64/libs/libz.a"; sourceTree = "<group>"; };
 		29AC14981A8BB909002DEB6D /* libtinyxml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxml2.a; path = "../external/mac/x86-64/libs/libtinyxml2.a"; sourceTree = "<group>"; };
 		29AC149A1A8BB974002DEB6D /* libglfw.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw.a; path = "../external/mac/x86-64/libs/libglfw.a"; sourceTree = "<group>"; };
+		29AC14C21A8C5E75002DEB6D /* libchipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libchipmunk.a; path = ../external/ios/libs/libchipmunk.a; sourceTree = "<group>"; };
+		29AC14C31A8C5E75002DEB6D /* libcjson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcjson.a; path = ../external/ios/libs/libcjson.a; sourceTree = "<group>"; };
+		29AC14C41A8C5E75002DEB6D /* libconvertutf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libconvertutf.a; path = ../external/ios/libs/libconvertutf.a; sourceTree = "<group>"; };
+		29AC14C51A8C5E75002DEB6D /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../external/ios/libs/libcrypto.a; sourceTree = "<group>"; };
+		29AC14C61A8C5E75002DEB6D /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../external/ios/libs/libcurl.a; sourceTree = "<group>"; };
+		29AC14C71A8C5E75002DEB6D /* libedtaa3func.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libedtaa3func.a; path = ../external/ios/libs/libedtaa3func.a; sourceTree = "<group>"; };
+		29AC14C81A8C5E75002DEB6D /* libflatbuffers.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libflatbuffers.a; path = ../external/ios/libs/libflatbuffers.a; sourceTree = "<group>"; };
+		29AC14C91A8C5E75002DEB6D /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../external/ios/libs/libfreetype.a; sourceTree = "<group>"; };
+		29AC14CA1A8C5E75002DEB6D /* libjpeg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjpeg.a; path = ../external/ios/libs/libjpeg.a; sourceTree = "<group>"; };
+		29AC14CB1A8C5E75002DEB6D /* liblua.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblua.a; path = ../external/ios/libs/liblua.a; sourceTree = "<group>"; };
+		29AC14CC1A8C5E75002DEB6D /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../external/ios/libs/libluajit.a; sourceTree = "<group>"; };
+		29AC14CD1A8C5E75002DEB6D /* libluasocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluasocket.a; path = ../external/ios/libs/libluasocket.a; sourceTree = "<group>"; };
+		29AC14CE1A8C5E75002DEB6D /* libminizip.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libminizip.a; path = ../external/ios/libs/libminizip.a; sourceTree = "<group>"; };
+		29AC14CF1A8C5E75002DEB6D /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = ../external/ios/libs/libpng.a; sourceTree = "<group>"; };
+		29AC14D01A8C5E75002DEB6D /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../external/ios/libs/libssl.a; sourceTree = "<group>"; };
+		29AC14D11A8C5E75002DEB6D /* libtiff.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtiff.a; path = ../external/ios/libs/libtiff.a; sourceTree = "<group>"; };
+		29AC14D21A8C5E75002DEB6D /* libtinyxml2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libtinyxml2.a; path = ../external/ios/libs/libtinyxml2.a; sourceTree = "<group>"; };
+		29AC14D31A8C5E75002DEB6D /* libwebp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebp.a; path = ../external/ios/libs/libwebp.a; sourceTree = "<group>"; };
+		29AC14D41A8C5E75002DEB6D /* libwebsockets.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebsockets.a; path = ../external/ios/libs/libwebsockets.a; sourceTree = "<group>"; };
+		29AC14D51A8C5E75002DEB6D /* libxxhash.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxxhash.a; path = ../external/ios/libs/libxxhash.a; sourceTree = "<group>"; };
+		29AC14D61A8C5E75002DEB6D /* libxxtea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxxtea.a; path = ../external/ios/libs/libxxtea.a; sourceTree = "<group>"; };
+		29AC14D71A8C5E75002DEB6D /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../external/ios/libs/libz.a; sourceTree = "<group>"; };
 		29BDBA52195D597A003225C9 /* UIDeprecated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIDeprecated.cpp; sourceTree = "<group>"; };
 		29CB8F4A1929D1BB00C841D6 /* UILayoutManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UILayoutManager.cpp; sourceTree = "<group>"; };
 		29CB8F4B1929D1BB00C841D6 /* UILayoutManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILayoutManager.h; sourceTree = "<group>"; };
@@ -2728,6 +2772,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				A07A4CAF1783777C0073F6A7 /* Foundation.framework in Frameworks */,
+				29AC14D81A8C5E75002DEB6D /* libchipmunk.a in Frameworks */,
+				29AC14D91A8C5E75002DEB6D /* libcjson.a in Frameworks */,
+				29AC14DA1A8C5E75002DEB6D /* libconvertutf.a in Frameworks */,
+				29AC14DB1A8C5E75002DEB6D /* libcrypto.a in Frameworks */,
+				29AC14DC1A8C5E75002DEB6D /* libcurl.a in Frameworks */,
+				29AC14DD1A8C5E75002DEB6D /* libedtaa3func.a in Frameworks */,
+				29AC14DE1A8C5E75002DEB6D /* libflatbuffers.a in Frameworks */,
+				29AC14DF1A8C5E75002DEB6D /* libfreetype.a in Frameworks */,
+				29AC14E01A8C5E75002DEB6D /* libjpeg.a in Frameworks */,
+				29AC14E11A8C5E75002DEB6D /* liblua.a in Frameworks */,
+				29AC14E21A8C5E75002DEB6D /* libluajit.a in Frameworks */,
+				29AC14E31A8C5E75002DEB6D /* libluasocket.a in Frameworks */,
+				29AC14E41A8C5E75002DEB6D /* libminizip.a in Frameworks */,
+				29AC14E51A8C5E75002DEB6D /* libpng.a in Frameworks */,
+				29AC14E61A8C5E76002DEB6D /* libssl.a in Frameworks */,
+				29AC14E71A8C5E76002DEB6D /* libtiff.a in Frameworks */,
+				29AC14E81A8C5E76002DEB6D /* libtinyxml2.a in Frameworks */,
+				29AC14E91A8C5E76002DEB6D /* libwebp.a in Frameworks */,
+				29AC14EA1A8C5E76002DEB6D /* libwebsockets.a in Frameworks */,
+				29AC14EB1A8C5E76002DEB6D /* libxxhash.a in Frameworks */,
+				29AC14EC1A8C5E76002DEB6D /* libxxtea.a in Frameworks */,
+				29AC14ED1A8C5E76002DEB6D /* libz.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2794,6 +2860,28 @@
 		1551A341158F2AB200E66CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29AC14C21A8C5E75002DEB6D /* libchipmunk.a */,
+				29AC14C31A8C5E75002DEB6D /* libcjson.a */,
+				29AC14C41A8C5E75002DEB6D /* libconvertutf.a */,
+				29AC14C51A8C5E75002DEB6D /* libcrypto.a */,
+				29AC14C61A8C5E75002DEB6D /* libcurl.a */,
+				29AC14C71A8C5E75002DEB6D /* libedtaa3func.a */,
+				29AC14C81A8C5E75002DEB6D /* libflatbuffers.a */,
+				29AC14C91A8C5E75002DEB6D /* libfreetype.a */,
+				29AC14CA1A8C5E75002DEB6D /* libjpeg.a */,
+				29AC14CB1A8C5E75002DEB6D /* liblua.a */,
+				29AC14CC1A8C5E75002DEB6D /* libluajit.a */,
+				29AC14CD1A8C5E75002DEB6D /* libluasocket.a */,
+				29AC14CE1A8C5E75002DEB6D /* libminizip.a */,
+				29AC14CF1A8C5E75002DEB6D /* libpng.a */,
+				29AC14D01A8C5E75002DEB6D /* libssl.a */,
+				29AC14D11A8C5E75002DEB6D /* libtiff.a */,
+				29AC14D21A8C5E75002DEB6D /* libtinyxml2.a */,
+				29AC14D31A8C5E75002DEB6D /* libwebp.a */,
+				29AC14D41A8C5E75002DEB6D /* libwebsockets.a */,
+				29AC14D51A8C5E75002DEB6D /* libxxhash.a */,
+				29AC14D61A8C5E75002DEB6D /* libxxtea.a */,
+				29AC14D71A8C5E75002DEB6D /* libz.a */,
 				29AC149A1A8BB974002DEB6D /* libglfw.a */,
 				29AC14981A8BB909002DEB6D /* libtinyxml2.a */,
 				29AC146E1A8BB8A5002DEB6D /* libchipmunk.a */,
@@ -6271,18 +6359,12 @@
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../external/png/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/jpeg/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/tiff/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/webp/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/freetype2/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/curl/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/websockets/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/chipmunk/prebuilt/ios\"",
+					"\"$(SRCROOT)/../external/ios/libs\"",
+					"/Users/guanghui/cocos2d-x/external/ios/libs",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/chipmunk/include/chipmunk";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/ios/include $(SRCROOT)/../external/ios/include/freetype";
 				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Debug;
@@ -6307,18 +6389,12 @@
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../external/png/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/jpeg/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/tiff/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/webp/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/freetype2/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/curl/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/websockets/prebuilt/ios\"",
-					"\"$(SRCROOT)/../external/chipmunk/prebuilt/ios\"",
+					"\"$(SRCROOT)/../external/ios/libs\"",
+					"/Users/guanghui/cocos2d-x/external/ios/libs",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/chipmunk/include/chipmunk";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/ios/include $(SRCROOT)/../external/ios/include/freetype";
 				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Release;
