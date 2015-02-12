@@ -716,6 +716,7 @@
 		29AC14F81A8C7447002DEB6D /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1C8B6E1A7F6FA8006DCCB1 /* AVFoundation.framework */; };
 		29AC14F91A8C745D002DEB6D /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1C8B5C1A7F6F4E006DCCB1 /* CoreMotion.framework */; };
 		29AC14FA1A8C748D002DEB6D /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC1C8B541A7F6ECA006DCCB1 /* MediaPlayer.framework */; };
+		29AC14FE1A8C77B1002DEB6D /* libxxtea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14FD1A8C77B0002DEB6D /* libxxtea.a */; };
 		29AFEF6719ACCAA000F6B10A /* Test.html in Resources */ = {isa = PBXBuildFile; fileRef = 29AFEF6619ACCAA000F6B10A /* Test.html */; };
 		29FBBBFE196A9ECD00E65826 /* CocostudioParserJsonTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29FBBBFC196A9ECD00E65826 /* CocostudioParserJsonTest.cpp */; };
 		29FBBBFF196A9ECD00E65826 /* CocostudioParserJsonTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29FBBBFC196A9ECD00E65826 /* CocostudioParserJsonTest.cpp */; };
@@ -1860,6 +1861,7 @@
 		29AC14A71A8BCC2E002DEB6D /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		29AC14EE1A8C73B3002DEB6D /* libbox2d.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbox2d.a; path = ../external/ios/libs/libbox2d.a; sourceTree = "<group>"; };
 		29AC14F01A8C7404002DEB6D /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		29AC14FD1A8C77B0002DEB6D /* libxxtea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxxtea.a; path = ../external/ios/libs/libxxtea.a; sourceTree = "<group>"; };
 		29AFEF6619ACCAA000F6B10A /* Test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Test.html; path = "../tests/cpp-tests/Resources/Test.html"; sourceTree = "<group>"; };
 		29FBBBFC196A9ECD00E65826 /* CocostudioParserJsonTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CocostudioParserJsonTest.cpp; sourceTree = "<group>"; };
 		29FBBBFD196A9ECD00E65826 /* CocostudioParserJsonTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocostudioParserJsonTest.h; sourceTree = "<group>"; };
@@ -2102,6 +2104,7 @@
 			files = (
 				15EFA68B198B3AD8000C57D3 /* libcocos2d iOS.a in Frameworks */,
 				15EFA68D198B3AD8000C57D3 /* libluacocos2d iOS.a in Frameworks */,
+				29AC14FE1A8C77B1002DEB6D /* libxxtea.a in Frameworks */,
 				15AECE25195D467D00907DB0 /* MediaPlayer.framework in Frameworks */,
 				1A0EE42C18CDF799004CD58F /* libz.dylib in Frameworks */,
 				1A0EE42D18CDF799004CD58F /* CoreMotion.framework in Frameworks */,
@@ -3981,6 +3984,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29AC14FD1A8C77B0002DEB6D /* libxxtea.a */,
 				29AC14F01A8C7404002DEB6D /* CoreFoundation.framework */,
 				29AC14EE1A8C73B3002DEB6D /* libbox2d.a */,
 				29AC14A51A8BC84C002DEB6D /* libbox2d.a */,
@@ -6252,11 +6256,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../external/curl/prebuilt/ios",
+					"$(SRCROOT)/../external/ios/libs",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/.. $(SRCROOT)/../cocos/platform/ios $(SRCROOT)/../external $(SRCROOT)/../external/lua/luajit/include $(SRCROOT)/../cocos/scripting/lua-bindings/manual $(SRCROOT)/../cocos/scripting/lua-bindings/auto $(SRCROOT)/../cocos/scripting/lua-bindings/manual/tolua";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/.. $(SRCROOT)/../cocos/platform/ios $(SRCROOT)/../external/ios/include/luajit $(SRCROOT)/../external/ios/include $(SRCROOT)/../cocos/scripting/lua-bindings/manual $(SRCROOT)/../cocos/scripting/lua-bindings/auto $(SRCROOT)/../cocos/scripting/lua-bindings/manual/tolua";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
@@ -6273,11 +6277,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(SRCROOT)/../external/curl/prebuilt/ios",
+					"$(SRCROOT)/../external/ios/libs",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/.. $(SRCROOT)/../cocos/platform/ios $(SRCROOT)/../external $(SRCROOT)/../external/lua/luajit/include $(SRCROOT)/../cocos/scripting/lua-bindings/manual $(SRCROOT)/../cocos/scripting/lua-bindings/auto $(SRCROOT)/../cocos/scripting/lua-bindings/manual/tolua";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/.. $(SRCROOT)/../cocos/platform/ios $(SRCROOT)/../external/ios/include/luajit $(SRCROOT)/../external/ios/include $(SRCROOT)/../cocos/scripting/lua-bindings/manual $(SRCROOT)/../cocos/scripting/lua-bindings/auto $(SRCROOT)/../cocos/scripting/lua-bindings/manual/tolua";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "arm64 armv7";
 			};

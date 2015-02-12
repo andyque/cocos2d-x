@@ -179,6 +179,7 @@
 		15EFA641198B32BB000C57D3 /* CCLuaObjcBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 1AACE78E18BC45C200215002 /* CCLuaObjcBridge.h */; };
 		29AC14BB1A8C50A4002DEB6D /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14BA1A8C50A4002DEB6D /* libluajit.a */; };
 		29AC14BF1A8C5652002DEB6D /* libxxtea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14BE1A8C5652002DEB6D /* libxxtea.a */; };
+		29AC14FC1A8C772B002DEB6D /* libxxtea.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC14FB1A8C772B002DEB6D /* libxxtea.a */; };
 		3E2BDB0519C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BDB0319C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.cpp */; };
 		3E2BDB0619C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 3E2BDB0419C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.hpp */; };
 		3E2BDB0A19C5E6100055CDCD /* lua_cocos2dx_audioengine_manual.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3E2BDB0819C5E6100055CDCD /* lua_cocos2dx_audioengine_manual.cpp */; };
@@ -285,6 +286,7 @@
 		2905FACF18CF12E600240AA3 /* lua_cocos2dx_ui_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_cocos2dx_ui_auto.hpp; sourceTree = "<group>"; };
 		29AC14BA1A8C50A4002DEB6D /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = "../../../../external/mac/x86-64/libs/libluajit.a"; sourceTree = "<group>"; };
 		29AC14BE1A8C5652002DEB6D /* libxxtea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxxtea.a; path = "../../../../external/mac/x86-64/libs/libxxtea.a"; sourceTree = "<group>"; };
+		29AC14FB1A8C772B002DEB6D /* libxxtea.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libxxtea.a; path = ../../../../external/ios/libs/libxxtea.a; sourceTree = "<group>"; };
 		3E2BDB0319C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_audioengine_auto.cpp; sourceTree = "<group>"; };
 		3E2BDB0419C5E5FE0055CDCD /* lua_cocos2dx_audioengine_auto.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = lua_cocos2dx_audioengine_auto.hpp; sourceTree = "<group>"; };
 		3E2BDB0819C5E6100055CDCD /* lua_cocos2dx_audioengine_manual.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lua_cocos2dx_audioengine_manual.cpp; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29AC14FC1A8C772B002DEB6D /* libxxtea.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +328,7 @@
 		1551A334158F2AB200E66CFE = {
 			isa = PBXGroup;
 			children = (
+				29AC14FB1A8C772B002DEB6D /* libxxtea.a */,
 				29AC14BE1A8C5652002DEB6D /* libxxtea.a */,
 				29AC14BA1A8C50A4002DEB6D /* libluajit.a */,
 				1AACE74818BC45C200215002 /* auto */,
@@ -967,10 +971,7 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../../external/lua/luajit/prebuilt/ios",
-					"$(SRCROOT)/../../../../external/lua/lua/prebuilt/ios",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../../external/ios/libs";
 				"OTHER_LDFLAGS[sdk=iphonesimulator7.1]" = "-llua";
 				"OTHER_LDFLAGS[sdk=iphonesimulator8.0]" = "-llua";
 				PRODUCT_NAME = "libluacocos2d iOS";
@@ -999,10 +1000,7 @@
 				);
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/../../../../external/lua/luajit/prebuilt/ios",
-					"$(SRCROOT)/../../../../external/lua/lua/prebuilt/ios",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../../external/ios/libs";
 				"OTHER_LDFLAGS[sdk=iphonesimulator7.1]" = "-llua";
 				"OTHER_LDFLAGS[sdk=iphonesimulator8.0]" = "-llua";
 				PRODUCT_NAME = "libluacocos2d iOS";

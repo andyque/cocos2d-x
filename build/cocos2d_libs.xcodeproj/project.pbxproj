@@ -6358,10 +6358,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../external/ios/libs\"",
-					"/Users/guanghui/cocos2d-x/external/ios/libs",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../external/ios/libs\"";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/ios/include $(SRCROOT)/../external/ios/include/freetype";
@@ -6388,10 +6385,7 @@
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
 				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/../external/ios/libs\"",
-					"/Users/guanghui/cocos2d-x/external/ios/libs",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../external/ios/libs\"";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/ios/include $(SRCROOT)/../external/ios/include/freetype";
