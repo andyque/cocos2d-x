@@ -197,13 +197,15 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \
                     $(LOCAL_PATH)/base \
                     $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include \
-                    $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include/freetype \
+                    $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include/freetype 
+
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/. \
                     $(LOCAL_PATH)/platform \
+                    $(LOCAL_PATH)/platform/android \
                     $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include \
-                    $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include/freetype \
+                    $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include/freetype
 
 LOCAL_EXPORT_LDLIBS := -lGLESv2 \
                        -llog \
@@ -215,8 +217,22 @@ LOCAL_STATIC_LIBRARIES += cocos_jpeg_static
 LOCAL_STATIC_LIBRARIES += cocos_tiff_static
 LOCAL_STATIC_LIBRARIES += cocos_webp_static
 LOCAL_STATIC_LIBRARIES += cocos_chipmunk_static
+LOCAL_STATIC_LIBRARIES += cocos_tinyxml2_static
+LOCAL_STATIC_LIBRARIES += cocos_convertutf_static
+LOCAL_STATIC_LIBRARIES += cocos_cjson_static
+LOCAL_STATIC_LIBRARIES += cocos_minizip_static
+LOCAL_STATIC_LIBRARIES += cocos_xxhash_static
+LOCAL_STATIC_LIBRARIES += cocos_xxtea_static
+LOCAL_STATIC_LIBRARIES += cocos_edtaa3func_static
+LOCAL_STATIC_LIBRARIES += cocos_zlib_static
 
 LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dxandroid_static
+
+#for adding cpufeatures
+LOCAL_WHOLE_STATIC_LIBRARIES += cpufeatures
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+    LOCAL_CFLAGS := -DHAVE_NEON=1
+endif
 
 # define the macro to compile through support/zip_support/ioapi.c
 LOCAL_CFLAGS   :=  -DUSE_FILE32API
@@ -242,6 +258,7 @@ LOCAL_STATIC_LIBRARIES += audioengine_static
 
 include $(BUILD_STATIC_LIBRARY)
 #==============================================================
+$(call import-module,.)
 $(call import-module,platform/android)
 $(call import-module,3d)
 $(call import-module,audio/android)
@@ -251,3 +268,4 @@ $(call import-module,editor-support/spine)
 $(call import-module,network)
 $(call import-module,ui)
 $(call import-module,extensions)
+$(call import-module, android/cpufeatures)
