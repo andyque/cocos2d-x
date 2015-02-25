@@ -59,10 +59,10 @@
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>../../external/win32/i386/libs/Debug;../../external/win32/i386/libs/Release;$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(EngineRoot)external/win32/i386/libs/Debug;$(EngineRoot)external/win32/i386/libs/Release;$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>../../external/win32/i386/libs/Release;$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(EngineRoot)external/win32/i386/libs/Release;$(MSBuildProgramFiles32)\Microsoft SDKs\Windows\v7.1A\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <PreBuildEvent>
@@ -125,23 +125,7 @@
       <Optimization>MinSpace</Optimization>
     </ClCompile>
     <PreLinkEvent>
-      <Command>if not exist "$(OutDir)" mkdir "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\freetype2\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\glfw3\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\curl\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\jpeg\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\png\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\tiff\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\webp\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\websockets\prebuilt\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\win32-specific\zlib\prebuilt\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\win32-specific\icon\prebuilt\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\win32-specific\gles\prebuilt\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\win32-specific\OpenalSoft\prebuilt\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\win32-specific\MP3Decoder\prebuilt\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\win32-specific\OggDecoder\prebuilt\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\sqlite3\libraries\win32\*.*" "$(OutDir)"
-xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*" "$(OutDir)"
+      <Command>
 </Command>
     </PreLinkEvent>
     <Link>
