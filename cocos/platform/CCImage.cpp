@@ -457,7 +457,7 @@ Image::Image()
 , _width(0)
 , _height(0)
 , _unpack(false)
-, _fileType(Format::UNKOWN)
+, _fileType(Format::UNKNOWN)
 , _renderFormat(Texture2D::PixelFormat::NONE)
 , _numberOfMipmaps(0)
 , _hasPremultipliedAlpha(true)
@@ -742,7 +742,7 @@ Image::Format Image::detectFormat(const unsigned char * data, ssize_t dataLen)
     }
     else
     {
-        return Format::UNKOWN;
+        return Format::UNKNOWN;
     }
 }
 
@@ -2025,7 +2025,7 @@ bool Image::initWithWebpData(const unsigned char * data, ssize_t dataLen)
 #if CC_USE_WEBP
 	bool ret = false;
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
     CCLOG("WEBP image format not supported on WinRT or WP8");
 #else
 	do
@@ -2060,7 +2060,7 @@ bool Image::initWithWebpData(const unsigned char * data, ssize_t dataLen)
         
         ret = true;
 	} while (0);
-#endif // (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+#endif //(CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
 	return ret;
 #else 
     CCLOG("webp is not enabled, please enable it in ccConfig.h");
