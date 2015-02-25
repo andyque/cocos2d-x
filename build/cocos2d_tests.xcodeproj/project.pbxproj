@@ -6134,7 +6134,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../external/mac/x86-64/libs",
 				);
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include $(SRCROOT)/../extensions";
 			};
 			name = Debug;
 		};
@@ -6154,7 +6154,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../external/mac/x86-64/libs",
 				);
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../cocos/platform/mac $(SRCROOT)/../external/mac/x86-64/include $(SRCROOT)/../extensions";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
