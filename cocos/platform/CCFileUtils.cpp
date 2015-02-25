@@ -34,11 +34,14 @@ THE SOFTWARE.
 #include "base/ccUtils.h"
 
 #include "tinyxml2/tinyxml2.h"
+extern "C"{
 #ifdef MINIZIP_FROM_SYSTEM
 #include <minizip/unzip.h>
 #else // from our embedded sources
 #include "minizip/unzip.h"
 #endif
+}
+
 #include <sys/stat.h>
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT || CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
