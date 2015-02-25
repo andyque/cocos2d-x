@@ -35,7 +35,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include <sqlite3.h>
+#include "sqlite3/sqlite3.h"
 
 static int _initialized = 0;
 static sqlite3 *_db;
