@@ -14,7 +14,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../.. \
                     $(LOCAL_PATH)/../manual/tolua \
                     $(LOCAL_PATH)/../manual/platform/android \
                     $(LOCAL_PATH)/../manual/platform/android/jni \
-		    $(LOCAL_PATH)/../../../../external/android/$(TARGET_ARCH_ABI)/include/luajit \
 
 LOCAL_EXPORT_LDLIBS := -lGLESv2 \
                        -llog \
@@ -99,7 +98,6 @@ LOCAL_SRC_FILES += ../manual/extension/lua_cocos2dx_extension_manual.cpp \
                    ../auto/lua_cocos2dx_extension_auto.cpp \
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/android/$(TARGET_ARCH_ABI)/include \
-		    $(LOCAL_PATH)/../../../../external/android/$(TARGET_ARCH_ABI)/include/luajit \
                     $(LOCAL_PATH)/../../../2d \
                     $(LOCAL_PATH)/../../../3d \
                     $(LOCAL_PATH)/../../../network \
@@ -125,7 +123,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../../external/android/$(TARGET_ARCH_ABI
                     $(LOCAL_PATH)/../../../.. \
 
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH)/../../../../external/android/$(TARGET_ARCH_ABI)/include \
-			   $(LOCAL_PATH)/../../../../external/android/$(TARGET_ARCH_ABI)/include/luajit \
                            $(LOCAL_PATH)/../auto \
                            $(LOCAL_PATH)/../manual \
                            $(LOCAL_PATH)/../manual/tolua \
@@ -149,4 +146,3 @@ LOCAL_STATIC_LIBRARIES += cocos_luasocket_static
 include $(BUILD_STATIC_LIBRARY)
 
 $(call import-module,.)
-$(call import-module,cocos)

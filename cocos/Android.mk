@@ -195,7 +195,6 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \
                     $(LOCAL_PATH)/base \
                     $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include \
-                    $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include/freetype 
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
@@ -203,7 +202,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/platform \
                     $(LOCAL_PATH)/platform/android \
                     $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include \
-                    $(LOCAL_PATH)/../external/android/$(TARGET_ARCH_ABI)/include/freetype
 
 LOCAL_EXPORT_LDLIBS := -lGLESv2 \
                        -llog \
@@ -257,6 +255,7 @@ LOCAL_STATIC_LIBRARIES += audioengine_static
 include $(BUILD_STATIC_LIBRARY)
 #==============================================================
 $(call import-module,.)
+$(call import-module,external/android)
 $(call import-module,platform/android)
 $(call import-module,3d)
 $(call import-module,audio/android)

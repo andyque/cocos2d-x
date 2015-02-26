@@ -55,9 +55,9 @@ For More information:
     # windows should use ";" to seperate module paths
     platform = sys.platform
     if platform == 'win32':
-        ndk_module_path = 'NDK_MODULE_PATH=%s;%s/external/android;%s/cocos' % (cocos_root, cocos_root, cocos_root)
+        ndk_module_path = 'NDK_MODULE_PATH=%s;%s;%s/cocos' % (cocos_root, cocos_root, cocos_root)
     else:
-        ndk_module_path = 'NDK_MODULE_PATH=%s:%s/external/android:%s/cocos' % (cocos_root, cocos_root, cocos_root)
+        ndk_module_path = 'NDK_MODULE_PATH=%s:%s:%s/cocos' % (cocos_root, cocos_root, cocos_root)
     
     ''' The build process can be accelerated by running multiple concurrent job processes using the -j-option.
     '''
