@@ -92,11 +92,29 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxBundlePlatforms>x86</AppxBundlePlatforms>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <Import Project="..\cpp-tests.Shared\cpp-tests.Shared.vcxitems" Label="Shared" />
   <ItemDefinitionGroup Condition="'$(Platform)'=='ARM'">
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" />
     </Link>
     <ClCompile>
@@ -115,7 +133,7 @@
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
     </Link>
     <ClCompile>
@@ -134,7 +152,7 @@
   <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
     <Link>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <LinkTimeCodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
     </Link>
     <ClCompile>

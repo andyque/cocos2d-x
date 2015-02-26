@@ -111,31 +111,37 @@
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
     <TargetName>libcocos2d_v4.0_Windows_8.1</TargetName>
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
     <TargetName>libcocos2d_v4.0_Windows_8.1</TargetName>
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
     <TargetName>libcocos2d_v4.0_Windows_8.1</TargetName>
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
     <TargetName>libcocos2d_v4.0_Windows_8.1</TargetName>
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
     <TargetName>libcocos2d_v4.0_Windows_8.1</TargetName>
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <GenerateManifest>false</GenerateManifest>
     <IgnoreImportLibrary>false</IgnoreImportLibrary>
     <TargetName>libcocos2d_v4.0_Windows_8.1</TargetName>
+    <LibraryPath>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -151,7 +157,7 @@
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>..\..\..\cocos2d.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
@@ -188,7 +194,7 @@
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>..\..\..\cocos2d.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
@@ -225,7 +231,7 @@
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <GenerateWindowsMetadata>false</GenerateWindowsMetadata>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(EngineRoot)external\$(COCOS2D_PLATFORM)\$(Platform)\libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ModuleDefinitionFile>..\..\..\cocos2d.def</ModuleDefinitionFile>
     </Link>
   </ItemDefinitionGroup>
