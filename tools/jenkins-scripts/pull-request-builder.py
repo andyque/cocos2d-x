@@ -11,7 +11,6 @@ import traceback
 from shutil import copy
 import subprocess
 
-#set Jenkins build description using submitDescription to mock browser behavior
 http_proxy = ''
 if('HTTP_PROXY' in os.environ):
     http_proxy = os.environ['HTTP_PROXY']
