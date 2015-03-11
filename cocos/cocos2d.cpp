@@ -28,7 +28,7 @@ THE SOFTWARE.
 #include "platform/CCPlatformMacros.h"
 
 NS_CC_BEGIN
-
+//test pr in v3
 CC_DLL const char* cocos2dVersion()
 {
     return "cocos2d-x 3.5beta0";
