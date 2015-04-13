@@ -42,7 +42,7 @@ def set_jenkins_job_description(desc, url):
 
 def check_current_3rd_libs(branch):
     #run download-deps.py
-    print("prepare to downloading ...")
+    print("prepare to downloading 3rd party libraries ...")
     os.system('python download-deps.py -r no')
 
 
