@@ -62,7 +62,7 @@ public:
      */
     static RenderTexture * create(int width ,int height, Texture2D::PixelFormat format, GLuint depthStencilFormat, std::string& kjk);
 
-    /** Creates a RenderTexture object with width and height in Points and a pixel format, only RGB and RGBA formats are valid. 
+    /** Creates a RenderTexture objewith width and height in Points and a pixel format, only RGB and RGBA formats are valid.
      *
      * @param w The RenderTexture object width.
      * @param h The RenderTexture object height.
@@ -90,7 +90,6 @@ public:
      */
     virtual void beginWithClear(float r, float g, float b, float a);
 
-    /** Starts rendering to the texture while clearing the texture first.
      * This is more efficient then calling -clear first and then -begin.
      *
      * @param r Red.
@@ -105,7 +104,6 @@ public:
      * This is more efficient then calling -clear first and then -begin. 
      *
      * @param r Red.
-     * @param g Green.
      * @param b Blue.
      * @param a Alpha.
      * @param depthValue A specified depth value.
