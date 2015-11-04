@@ -1138,6 +1138,17 @@ void Label::updateContent()
 #endif
 }
 
+void Label::setFontSize(float fontSize)
+{
+    if (_currentLabelType == LabelType::TTF) {
+        TTFConfig config = this->getTTFConfig();
+        config.fontSize = fontSize;
+        this->setTTFConfig(config);
+    }else if(_currentLabelType == LabelType::STRING_TEXTURE){
+        this->setSystemFontSize(fontSize);
+    }
+}
+
 void Label::onDrawShadow(GLProgram* glProgram)
 {
     if (_currentLabelType == LabelType::TTF)

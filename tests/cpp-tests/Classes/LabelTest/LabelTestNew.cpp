@@ -5,6 +5,7 @@
 
 USING_NS_CC;
 using namespace ui;
+using namespace extension;
 
 enum {
     kTagTileMap = 1,
@@ -2005,16 +2006,89 @@ std::string LabelIssue9500Test::subtitle() const
     return "Spaces should not be lost if label created with Fingerpop.ttf";
 }
 
+ControlStepper *LabelLayoutBaseTest::makeControlStepper()
+{
+    auto minusSprite       = Sprite::create("extensions/stepper-minus.png");
+    auto plusSprite        = Sprite::create("extensions/stepper-plus.png");
+    
+    return ControlStepper::create(minusSprite, plusSprite);
+}
+
 LabelLayoutBaseTest::LabelLayoutBaseTest()
 {
     auto center = VisibleRect::center();
     auto size = Director::getInstance()->getVisibleSize();
     
-    _label = Label::createWithTTF("Subclass should override this value", "fonts/Fingerpop.ttf", 20);
+    _label = Label::createWithTTF("五六七八This is a very long sentence一二三四.", "XueJ2312F.ttf", 20);
     _label->setDimensions(size.width/2, size.height/2);
     _label->setPosition(center);
     _label->setName("Label");
     addChild(_label);
+    
+    
+    auto label = Label::createWithSystemFont("Enable Wrap:", "Arial", 10);
+    label->setColor(Color3B::WHITE);
+    label->setPosition(Vec2(size.width * 0.8f - 50, size.height * 0.8f));
+    this->addChild(label);
+    
+//    _label->setBMFontFilePath("fonts/enligsh-chinese.fnt");
+    _label->setString("五六七八This is a very long sentence一二三四.");
+    
+    CheckBox* checkBox = CheckBox::create("cocosui/check_box_normal.png",
+                                          "cocosui/check_box_normal_press.png",
+                                          "cocosui/check_box_active.png",
+                                          "cocosui/check_box_normal_disable.png",
+                                          "cocosui/check_box_active_disable.png");
+    checkBox->setPosition(Vec2(size.width * 0.8f, size.height * 0.8f));
+    checkBox->setScale(0.5);
+    
+    
+    checkBox->addEventListener([=](Ref* ref, CheckBox::EventType event){
+        if (event == CheckBox::EventType::SELECTED) {
+            CCLOG("selected");
+        }else{
+            CCLOG("unselected");
+        }
+    });
+    this->addChild(checkBox);
+    
+    auto fontSizeLabel = Label::createWithSystemFont("font size:20", "Arial", 10);
+    fontSizeLabel->setName("fontSize");
+    
+    ControlStepper *stepper   = this->makeControlStepper();
+    stepper->setPosition(size.width * 0.5 - stepper->getContentSize().width / 2,
+                         size.height * 0.8);
+    stepper->setValue(20);
+    stepper->addTargetWithActionForControlEvents(this,
+                                                 cccontrol_selector(LabelLayoutBaseTest::valueChanged),
+                                                 Control::EventType::VALUE_CHANGED);
+    this->addChild(stepper);
+    stepper->setScale(0.5);
+    
+    fontSizeLabel->setPosition(stepper->getPosition() -
+                               Vec2(stepper->getContentSize().width/2  + fontSizeLabel->getContentSize().width/2,0));
+    this->addChild(fontSizeLabel);
+
+    //add text alignment settings
+    MenuItemFont::setFontSize(30);
+    auto menu = Menu::create(
+        MenuItemFont::create("Left", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentLeft, this)),
+        MenuItemFont::create("Center", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentCenter, this)),
+        MenuItemFont::create("Right", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentRight, this)),
+        nullptr);
+    menu->alignItemsVerticallyWithPadding(4);
+    menu->setPosition(Vec2(50, size.height / 2 - 20));
+    this->addChild(menu);
+
+    menu = Menu::create(
+        MenuItemFont::create("Top", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentTop, this)),
+        MenuItemFont::create("Middle", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentMiddle, this)),
+        MenuItemFont::create("Bottom", CC_CALLBACK_1(LabelLayoutBaseTest::setAlignmentBottom, this)),
+        nullptr);
+    menu->alignItemsVerticallyWithPadding(4);
+    menu->setPosition(Vec2(size.width - 50, size.height / 2 - 20));
+    this->addChild(menu);
+
 
     auto slider = ui::Slider::create();
     slider->setTag(1);
@@ -2022,7 +2096,7 @@ LabelLayoutBaseTest::LabelLayoutBaseTest()
     slider->loadBarTexture("cocosui/sliderTrack.png");
     slider->loadSlidBallTextures("cocosui/sliderThumb.png", "cocosui/sliderThumb.png", "");
     slider->loadProgressBarTexture("cocosui/sliderProgress.png");
-    slider->setPosition(Vec2(size.width / 2.0f, size.height * 0.15f + slider->getContentSize().height * 2.0f));
+    slider->setPosition(Vec2(size.width / 2.0f, size.height * 0.15f + slider->getContentSize().height * 2.0f - 5));
     slider->setPercent(52);
     addChild(slider);
 
@@ -2032,7 +2106,7 @@ LabelLayoutBaseTest::LabelLayoutBaseTest()
     slider2->loadBarTexture("cocosui/sliderTrack.png");
     slider2->loadSlidBallTextures("cocosui/sliderThumb.png", "cocosui/sliderThumb.png", "");
     slider2->loadProgressBarTexture("cocosui/sliderProgress.png");
-    slider2->setPosition(Vec2(size.width * 0.15f, size.height / 2.0));
+    slider2->setPosition(Vec2(size.width * 0.2f, size.height / 2.0));
     slider2->setRotation(90);
     slider2->setPercent(52);
     addChild(slider2);
@@ -2044,14 +2118,55 @@ LabelLayoutBaseTest::LabelLayoutBaseTest()
     this->updateDrawNodeSize(_label->getContentSize());
 }
 
+void LabelLayoutBaseTest::setAlignmentLeft(Ref* sender)
+{
+    _label->setHorizontalAlignment(TextHAlignment::LEFT);
+}
+
+void LabelLayoutBaseTest::setAlignmentCenter(Ref* sender)
+{
+    _label->setHorizontalAlignment(TextHAlignment::CENTER);
+}
+
+void LabelLayoutBaseTest::setAlignmentRight(Ref* sender)
+{
+    _label->setHorizontalAlignment(TextHAlignment::RIGHT);
+}
+
+void LabelLayoutBaseTest::setAlignmentTop(Ref* sender)
+{
+    _label->setVerticalAlignment(TextVAlignment::TOP);
+}
+
+void LabelLayoutBaseTest::setAlignmentMiddle(Ref* sender)
+{
+    _label->setVerticalAlignment(TextVAlignment::CENTER);
+}
+
+void LabelLayoutBaseTest::setAlignmentBottom(Ref* sender)
+{
+    _label->setVerticalAlignment(TextVAlignment::BOTTOM);
+}
+
+
+void LabelLayoutBaseTest::valueChanged(cocos2d::Ref *sender, cocos2d::extension::Control::EventType controlEvent)
+{
+    ControlStepper* pControl = (ControlStepper*)sender;
+    // Change value of label.
+    auto fontSizeLabel = (Label*)this->getChildByName("fontSize");
+    float fontSize = (float)pControl->getValue();
+    fontSizeLabel->setString(StringUtils::format("font size:%d", (int)fontSize));
+    _label->setFontSize(fontSize);
+}
+
 void LabelLayoutBaseTest::updateDrawNodeSize(const cocos2d::Size &drawNodeSize)
 {
     auto origin    = Director::getInstance()->getWinSize();
     auto labelSize = _label->getContentSize();
-    
+
     origin.width = origin.width   / 2 - (labelSize.width / 2);
     origin.height = origin.height / 2 - (labelSize.height / 2);
-    
+
     Vec2 vertices[4]=
     {
         Vec2(origin.width, origin.height),
@@ -2070,27 +2185,34 @@ void LabelLayoutBaseTest::updateDrawNodeSize(const cocos2d::Size &drawNodeSize)
 LabelWrapTest::LabelWrapTest()
 {
     auto center = VisibleRect::center();
-    
+    auto winSize = Director::getInstance()->getVisibleSize();
     auto slider1 = (ui::Slider*)this->getChildByTag(1);
     auto slider2 = (ui::Slider*)this->getChildByTag(2);
     auto labelSize = _label->getContentSize();
+//    _label->setLineBreakWithoutSpace(true);
+    _label->setVerticalAlignment(TextVAlignment::TOP);
 
+    
     slider1->addEventListener([=](Ref* ref, Slider::EventType event){
         float percent = slider1->getPercent();
-        auto drawNodeSize = Size(percent / 100.0 * labelSize.width, labelSize.height);
+        auto drawNodeSize = Size(percent / 100.0 * winSize.width, labelSize.height);
+        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
+        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
         this->updateDrawNodeSize(drawNodeSize);
     });
 
     slider2->addEventListener([=](Ref* ref, Slider::EventType event){
         float percent = slider2->getPercent();
-        auto drawNodeSize = Size( labelSize.width, percent / 100.0 * labelSize.height);
+        auto drawNodeSize = Size( labelSize.width, percent / 100.0 * winSize.height);
+        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
+        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
         this->updateDrawNodeSize(drawNodeSize);
     });
 }
 
 std::string LabelWrapTest::title() const
 {
-    return "Test for wrap control.";
+    return "Clamp content Test.";
 }
 
 std::string LabelWrapTest::subtitle() const

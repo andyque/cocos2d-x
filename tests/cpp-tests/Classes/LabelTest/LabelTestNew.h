@@ -4,7 +4,7 @@
 #include "../BaseTest.h"
 #include "renderer/CCCustomCommand.h"
 #include "ui/CocosGUI.h"
-
+#include "extensions/cocos-ext.h"
 
 DEFINE_TEST_SUITE(NewLabelTests);
 
@@ -641,8 +641,16 @@ class LabelLayoutBaseTest : public AtlasDemoNew
 public:
     LabelLayoutBaseTest();
     void updateDrawNodeSize(const cocos2d::Size &drawNodeSize);
-    
+    cocos2d::extension::ControlStepper* makeControlStepper();
+    void valueChanged(cocos2d::Ref* sender, cocos2d::extension::Control::EventType controlEvent);
+
 protected:
+    void  setAlignmentLeft(cocos2d::Ref* sender);
+    void  setAlignmentCenter(cocos2d::Ref* sender);
+    void  setAlignmentRight(cocos2d::Ref* sender);
+    void  setAlignmentTop(cocos2d::Ref* sender);
+    void  setAlignmentMiddle(cocos2d::Ref* sender);
+    void  setAlignmentBottom(cocos2d::Ref* sender);
     cocos2d::DrawNode* _drawNode;
     cocos2d::Label* _label;
 };

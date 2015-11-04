@@ -366,7 +366,8 @@ public:
      */
     void setMaxLineWidth(float maxLineWidth);
     float getMaxLineWidth() { return _maxLineWidth; }
-
+    void setFontSize(float fontSize);
+    float getFontSize()const;
     /**
      * Makes the Label exactly this untransformed width.
      *
