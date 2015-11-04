@@ -88,6 +88,7 @@ NewLabelTests::NewLabelTests()
     ADD_TEST_CASE(LabelIssue10688Test);
     ADD_TEST_CASE(LabelIssue13202Test);
     ADD_TEST_CASE(LabelIssue9500Test);
+    ADD_TEST_CASE(LabelWrapTest);
 };
 
 LabelFNTColorAndOpacity::LabelFNTColorAndOpacity()
@@ -2002,4 +2003,97 @@ std::string LabelIssue9500Test::title() const
 std::string LabelIssue9500Test::subtitle() const
 {
     return "Spaces should not be lost if label created with Fingerpop.ttf";
+}
+
+LabelLayoutBaseTest::LabelLayoutBaseTest()
+{
+    auto center = VisibleRect::center();
+    auto size = Director::getInstance()->getVisibleSize();
+    
+    _label = Label::createWithTTF("Subclass should override this value", "fonts/Fingerpop.ttf", 20);
+    _label->setDimensions(size.width/2, size.height/2);
+    _label->setPosition(center);
+    _label->setName("Label");
+    addChild(_label);
+
+    auto slider = ui::Slider::create();
+    slider->setTag(1);
+    slider->setTouchEnabled(true);
+    slider->loadBarTexture("cocosui/sliderTrack.png");
+    slider->loadSlidBallTextures("cocosui/sliderThumb.png", "cocosui/sliderThumb.png", "");
+    slider->loadProgressBarTexture("cocosui/sliderProgress.png");
+    slider->setPosition(Vec2(size.width / 2.0f, size.height * 0.15f + slider->getContentSize().height * 2.0f));
+    slider->setPercent(52);
+    addChild(slider);
+
+    auto slider2 = ui::Slider::create();
+    slider2->setTag(2);
+    slider2->setTouchEnabled(true);
+    slider2->loadBarTexture("cocosui/sliderTrack.png");
+    slider2->loadSlidBallTextures("cocosui/sliderThumb.png", "cocosui/sliderThumb.png", "");
+    slider2->loadProgressBarTexture("cocosui/sliderProgress.png");
+    slider2->setPosition(Vec2(size.width * 0.15f, size.height / 2.0));
+    slider2->setRotation(90);
+    slider2->setPercent(52);
+    addChild(slider2);
+
+    _drawNode = DrawNode::create();
+   
+    _drawNode->setTag(3);
+    addChild(_drawNode);
+    this->updateDrawNodeSize(_label->getContentSize());
+}
+
+void LabelLayoutBaseTest::updateDrawNodeSize(const cocos2d::Size &drawNodeSize)
+{
+    auto origin    = Director::getInstance()->getWinSize();
+    auto labelSize = _label->getContentSize();
+    
+    origin.width = origin.width   / 2 - (labelSize.width / 2);
+    origin.height = origin.height / 2 - (labelSize.height / 2);
+    
+    Vec2 vertices[4]=
+    {
+        Vec2(origin.width, origin.height),
+        Vec2(drawNodeSize.width + origin.width, origin.height),
+        Vec2(drawNodeSize.width + origin.width, drawNodeSize.height + origin.height),
+        Vec2(origin.width, drawNodeSize.height + origin.height)
+    };
+    _drawNode->clear();
+    _drawNode->drawLine(vertices[0], vertices[1], Color4F(1.0, 1.0, 1.0, 1.0));
+    _drawNode->drawLine(vertices[0], vertices[3], Color4F(1.0, 1.0, 1.0, 1.0));
+    _drawNode->drawLine(vertices[2], vertices[3], Color4F(1.0, 1.0, 1.0, 1.0));
+    _drawNode->drawLine(vertices[1], vertices[2], Color4F(1.0, 1.0, 1.0, 1.0));
+
+}
+
+LabelWrapTest::LabelWrapTest()
+{
+    auto center = VisibleRect::center();
+    
+    auto slider1 = (ui::Slider*)this->getChildByTag(1);
+    auto slider2 = (ui::Slider*)this->getChildByTag(2);
+    auto labelSize = _label->getContentSize();
+
+    slider1->addEventListener([=](Ref* ref, Slider::EventType event){
+        float percent = slider1->getPercent();
+        auto drawNodeSize = Size(percent / 100.0 * labelSize.width, labelSize.height);
+        this->updateDrawNodeSize(drawNodeSize);
+    });
+
+    slider2->addEventListener([=](Ref* ref, Slider::EventType event){
+        float percent = slider2->getPercent();
+        auto drawNodeSize = Size( labelSize.width, percent / 100.0 * labelSize.height);
+        this->updateDrawNodeSize(drawNodeSize);
+    });
+}
+
+std::string LabelWrapTest::title() const
+{
+    return "Test for wrap control.";
+}
+
+std::string LabelWrapTest::subtitle() const
+{
+    return "";
 }

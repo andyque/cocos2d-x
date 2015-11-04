@@ -5,6 +5,7 @@
 #include "renderer/CCCustomCommand.h"
 #include "ui/CocosGUI.h"
 
+
 DEFINE_TEST_SUITE(NewLabelTests);
 
 class AtlasDemoNew : public TestCase
@@ -630,6 +631,28 @@ public:
     CREATE_FUNC(LabelIssue9500Test);
 
     LabelIssue9500Test();
+
+    virtual std::string title() const override;
+    virtual std::string subtitle() const override;
+};
+
+class LabelLayoutBaseTest : public AtlasDemoNew
+{
+public:
+    LabelLayoutBaseTest();
+    void updateDrawNodeSize(const cocos2d::Size &drawNodeSize);
+    
+protected:
+    cocos2d::DrawNode* _drawNode;
+    cocos2d::Label* _label;
+};
+
+class LabelWrapTest : public LabelLayoutBaseTest
+{
+public:
+    CREATE_FUNC(LabelWrapTest);
+
+    LabelWrapTest();
 
     virtual std::string title() const override;
     virtual std::string subtitle() const override;
