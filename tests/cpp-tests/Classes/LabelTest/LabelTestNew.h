@@ -651,6 +651,14 @@ protected:
     void  setAlignmentTop(cocos2d::Ref* sender);
     void  setAlignmentMiddle(cocos2d::Ref* sender);
     void  setAlignmentBottom(cocos2d::Ref* sender);
+    
+    void initWrapOption(const cocos2d::Size& size);
+    void initToggleLabelTypeOption(const cocos2d::Size& size);
+    void initAlignmentOption(const cocos2d::Size& size);
+    void initFontSizeChange(const cocos2d::Size& size);
+    void initSliders(const cocos2d::Size& size);
+    void initTestLabel(const cocos2d::Size& size);
+    void initDrawNode(const cocos2d::Size& size);
     cocos2d::DrawNode* _drawNode;
     cocos2d::Label* _label;
 };

@@ -2016,45 +2016,28 @@ ControlStepper *LabelLayoutBaseTest::makeControlStepper()
 
 LabelLayoutBaseTest::LabelLayoutBaseTest()
 {
-    auto center = VisibleRect::center();
     auto size = Director::getInstance()->getVisibleSize();
     
-    _label = Label::createWithTTF("五六七八This is a very long sentence一二三四.", "XueJ2312F.ttf", 20);
-    _label->setDimensions(size.width/2, size.height/2);
-    _label->setPosition(center);
-    _label->setName("Label");
-    addChild(_label);
-    
-    
-    auto label = Label::createWithSystemFont("Enable Wrap:", "Arial", 10);
-    label->setColor(Color3B::WHITE);
-    label->setPosition(Vec2(size.width * 0.8f - 50, size.height * 0.8f));
-    this->addChild(label);
-    
-//    _label->setBMFontFilePath("fonts/enligsh-chinese.fnt");
-    _label->setString("五六七八This is a very long sentence一二三四.");
-    
-    CheckBox* checkBox = CheckBox::create("cocosui/check_box_normal.png",
-                                          "cocosui/check_box_normal_press.png",
-                                          "cocosui/check_box_active.png",
-                                          "cocosui/check_box_normal_disable.png",
-                                          "cocosui/check_box_active_disable.png");
-    checkBox->setPosition(Vec2(size.width * 0.8f, size.height * 0.8f));
-    checkBox->setScale(0.5);
-    
-    
-    checkBox->addEventListener([=](Ref* ref, CheckBox::EventType event){
-        if (event == CheckBox::EventType::SELECTED) {
-            CCLOG("selected");
-        }else{
-            CCLOG("unselected");
-        }
-    });
-    this->addChild(checkBox);
-    
+    this->initTestLabel(size);
+
+    this->initFontSizeChange(size);
+    this->initToggleLabelTypeOption(size);
+
+    this->initWrapOption(size);
+
+    this->initAlignmentOption(size);
+
+    this->initSliders(size);
+
+    this->initDrawNode(size);
+
+}
+
+void LabelLayoutBaseTest::initFontSizeChange(const cocos2d::Size& size)
+{
     auto fontSizeLabel = Label::createWithSystemFont("font size:20", "Arial", 10);
     fontSizeLabel->setName("fontSize");
-    
+
     ControlStepper *stepper   = this->makeControlStepper();
     stepper->setPosition(size.width * 0.5 - stepper->getContentSize().width / 2,
                          size.height * 0.8);
@@ -2064,11 +2047,68 @@ LabelLayoutBaseTest::LabelLayoutBaseTest()
                                                  Control::EventType::VALUE_CHANGED);
     this->addChild(stepper);
     stepper->setScale(0.5);
-    
+
     fontSizeLabel->setPosition(stepper->getPosition() -
                                Vec2(stepper->getContentSize().width/2  + fontSizeLabel->getContentSize().width/2,0));
     this->addChild(fontSizeLabel);
+}
 
+void LabelLayoutBaseTest::initWrapOption(const cocos2d::Size& size)
+{
+    auto label = Label::createWithSystemFont("Enable Wrap:", "Arial", 10);
+    label->setColor(Color3B::WHITE);
+    label->setPosition(Vec2(size.width * 0.8f - 100, size.height * 0.8f));
+    this->addChild(label);
+
+    CheckBox* checkBox = CheckBox::create("cocosui/check_box_normal.png",
+                                          "cocosui/check_box_normal_press.png",
+                                          "cocosui/check_box_active.png",
+                                          "cocosui/check_box_normal_disable.png",
+                                          "cocosui/check_box_active_disable.png");
+    checkBox->setPosition(Vec2(size.width * 0.8f - 55, size.height * 0.8f));
+    checkBox->setScale(0.5);
+    checkBox->setName("toggleWrap");
+
+    checkBox->addEventListener([=](Ref* ref, CheckBox::EventType event){
+        if (event == CheckBox::EventType::SELECTED) {
+            CCLOG("selected");
+        }else{
+            CCLOG("unselected");
+        }
+    });
+    this->addChild(checkBox);
+}
+
+void LabelLayoutBaseTest::initToggleLabelTypeOption(const cocos2d::Size& size)
+{
+    auto label = Label::createWithSystemFont("Toggle Label Type:", "Arial", 10);
+    label->setColor(Color3B::WHITE);
+    label->setPosition(Vec2(size.width * 0.8f + 15, size.height * 0.8f));
+    this->addChild(label);
+    
+    CheckBox* checkBox = CheckBox::create("cocosui/check_box_normal.png",
+                                          "cocosui/check_box_normal_press.png",
+                                          "cocosui/check_box_active.png",
+                                          "cocosui/check_box_normal_disable.png",
+                                          "cocosui/check_box_active_disable.png");
+    checkBox->setPosition(Vec2(size.width * 0.8f + 70, size.height * 0.8f));
+    checkBox->setScale(0.5);
+    checkBox->setName("toggleType");
+    checkBox->setSelected(true);
+    
+    checkBox->addEventListener([=](Ref* ref, CheckBox::EventType event){
+        if (event == CheckBox::EventType::SELECTED) {
+            _label->setTTFConfig(_label->getTTFConfig());
+        }else{
+            _label->setBMFontFilePath("fonts/enligsh-chinese.fnt");
+        }
+    });
+    this->addChild(checkBox);
+
+}
+
+void LabelLayoutBaseTest::initAlignmentOption(const cocos2d::Size& size)
+{
     //add text alignment settings
     MenuItemFont::setFontSize(30);
     auto menu = Menu::create(
@@ -2088,8 +2128,10 @@ LabelLayoutBaseTest::LabelLayoutBaseTest()
     menu->alignItemsVerticallyWithPadding(4);
     menu->setPosition(Vec2(size.width - 50, size.height / 2 - 20));
     this->addChild(menu);
+}
 
-
+void LabelLayoutBaseTest::initSliders(const cocos2d::Size& size)
+{
     auto slider = ui::Slider::create();
     slider->setTag(1);
     slider->setTouchEnabled(true);
@@ -2110,13 +2152,28 @@ LabelLayoutBaseTest::LabelLayoutBaseTest()
     slider2->setRotation(90);
     slider2->setPercent(52);
     addChild(slider2);
+}
 
+void LabelLayoutBaseTest::initTestLabel(const cocos2d::Size& size)
+{
+    auto center = VisibleRect::center();
+    _label = Label::createWithTTF("五六七八This is a very long sentence一二三四.", "fonts/HKYuanMini.ttf", 20);
+    _label->setDimensions(size.width/2, size.height/2);
+    _label->setPosition(center);
+    _label->setName("Label");
+    _label->setString("五六七八This is a very long sentence一二三.");
+    addChild(_label);
+}
+
+void LabelLayoutBaseTest::initDrawNode(const cocos2d::Size& size)
+{
     _drawNode = DrawNode::create();
-   
+
     _drawNode->setTag(3);
     addChild(_drawNode);
     this->updateDrawNodeSize(_label->getContentSize());
 }
+
 
 void LabelLayoutBaseTest::setAlignmentLeft(Ref* sender)
 {
