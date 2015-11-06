@@ -2067,13 +2067,14 @@ void LabelLayoutBaseTest::initWrapOption(const cocos2d::Size& size)
                                           "cocosui/check_box_active_disable.png");
     checkBox->setPosition(Vec2(size.width * 0.8f - 55, size.height * 0.8f));
     checkBox->setScale(0.5);
+    checkBox->setSelected(true);
     checkBox->setName("toggleWrap");
 
     checkBox->addEventListener([=](Ref* ref, CheckBox::EventType event){
         if (event == CheckBox::EventType::SELECTED) {
-            CCLOG("selected");
+            _label->enableWrap(true);
         }else{
-            CCLOG("unselected");
+            _label->enableWrap(false);
         }
     });
     this->addChild(checkBox);
@@ -2253,6 +2254,9 @@ LabelWrapTest::LabelWrapTest()
     slider1->addEventListener([=](Ref* ref, Slider::EventType event){
         float percent = slider1->getPercent();
         auto drawNodeSize = Size(percent / 100.0 * winSize.width, labelSize.height);
+        if(drawNodeSize.width <=0){
+            drawNodeSize.width = 0.1f;
+        }
         _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
         _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
         this->updateDrawNodeSize(drawNodeSize);
@@ -2261,6 +2265,9 @@ LabelWrapTest::LabelWrapTest()
     slider2->addEventListener([=](Ref* ref, Slider::EventType event){
         float percent = slider2->getPercent();
         auto drawNodeSize = Size( labelSize.width, percent / 100.0 * winSize.height);
+        if(drawNodeSize.height <= 0){
+            drawNodeSize.height = 0.1f;
+        }
         _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
         _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
         this->updateDrawNodeSize(drawNodeSize);

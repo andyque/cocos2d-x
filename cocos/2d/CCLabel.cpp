@@ -471,7 +471,7 @@ void Label::reset()
     _blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
     _isOpacityModifyRGB = false;
     _insideBounds = true;
-    _enableWrap = false;
+    _enableWrap = true;
 }
 
 void Label::updateShaderProgram()
@@ -799,6 +799,15 @@ void Label::updateQuads()
                 if (py - letterDef.height < _tailoredBottomY)
                 {
                     _reusedRect.size.height = (py < _tailoredBottomY) ? 0.f : (py - _tailoredBottomY);
+                }
+            }
+
+            if(!_enableWrap){
+                auto px = _lettersInfo[ctr].positionX + letterDef.width/2;
+                if(_labelWidth > 0.f){
+                    if (px > _contentSize.width) {
+                        _reusedRect.size.width = 0;
+                    }
                 }
             }
 
@@ -1766,6 +1775,9 @@ void Label::setGlobalZOrder(float globalZOrder)
 
 void Label::enableWrap(bool enable)
 {
+    if(enable == _enableWrap){
+        return;
+    }
     this->_enableWrap = enable;
     _contentDirty = true;
 }

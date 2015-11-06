@@ -147,7 +147,7 @@ bool Label::multilineTextWrapByWord()
             }
 
             auto letterX = (nextLetterX + letterDef.offsetX) / contentScaleFactor;
-            if (_maxLineWidth > 0.f && nextWordX > 0.f && letterX + letterDef.width > _maxLineWidth)
+            if (_enableWrap && _maxLineWidth > 0.f && nextWordX > 0.f && letterX + letterDef.width > _maxLineWidth)
             {
                 _linesWidth.push_back(letterRight);
                 letterRight = 0.f;
@@ -259,7 +259,7 @@ bool Label::multilineTextWrapByChar()
         }
 
         auto letterX = (nextLetterX + letterDef.offsetX) / contentScaleFactor;
-        if (_maxLineWidth > 0.f && nextLetterX > 0.f && letterX + letterDef.width > _maxLineWidth)
+        if (_enableWrap && _maxLineWidth > 0.f && nextLetterX > 0.f && letterX + letterDef.width > _maxLineWidth)
         {
             _linesWidth.push_back(letterRight);
             letterRight = 0.f;
