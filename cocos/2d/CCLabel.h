@@ -179,7 +179,7 @@ public:
     *
     * @return An automatically released Label object.
     */
-    static Label * createWithCharMap(const std::string& charMapFile, int itemWidth, int itemHeight, int startCharMap);
+    static Label * createWithCharMap (const std::string& charMapFile, int itemWidth, int itemHeight, int startCharMap);
 
     /**
     * Allocates and initializes a Label, with char map configuration.
@@ -368,6 +368,8 @@ public:
     float getMaxLineWidth() { return _maxLineWidth; }
     void setFontSize(float fontSize);
     float getFontSize()const;
+    void enableWrap(bool enable);
+    bool isWrapEnabled()const;
     /**
      * Makes the Label exactly this untransformed width.
      *
@@ -615,6 +617,8 @@ protected:
 #if CC_LABEL_DEBUG_DRAW
     DrawNode* _debugDrawNode;
 #endif
+
+    bool _enableWrap;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Label);
 };

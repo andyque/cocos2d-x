@@ -467,11 +467,11 @@ void Label::reset()
 
     _useDistanceField = false;
     _useA8Shader = false;
-    _clipEnabled = false;
     _blendFuncDirty = false;
     _blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
     _isOpacityModifyRGB = false;
     _insideBounds = true;
+    _enableWrap = false;
 }
 
 void Label::updateShaderProgram()
@@ -1479,16 +1479,16 @@ float Label::getLineHeight() const
 
 void Label::setLineSpacing(float height)
 {
-	if (_lineSpacing != height)
-	{
-		_lineSpacing = height;
-		_contentDirty = true;
-	}
+    if (_lineSpacing != height)
+    {
+        _lineSpacing = height;
+        _contentDirty = true;
+    }
 }
 
 float Label::getLineSpacing() const
 {
-	return _lineSpacing;
+    return _lineSpacing;
 }
 
 void Label::setAdditionalKerning(float space)
@@ -1762,6 +1762,17 @@ void Label::setGlobalZOrder(float globalZOrder)
             _shadowNode->setGlobalZOrder(globalZOrder);
         }
     }
+}
+
+void Label::enableWrap(bool enable)
+{
+    this->_enableWrap = enable;
+    _contentDirty = true;
+}
+
+bool Label::isWrapEnabled()const
+{
+    return this->_enableWrap;
 }
 
 NS_CC_END
