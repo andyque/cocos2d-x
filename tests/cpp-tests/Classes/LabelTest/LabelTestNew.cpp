@@ -2266,6 +2266,7 @@ LabelWrapTest::LabelWrapTest()
     auto slider2 = (ui::Slider*)this->getChildByTag(2);
     auto labelSize = _label->getContentSize();
 //    _label->setLineBreakWithoutSpace(true);
+    _label->setLineSpacing(5);
     _label->setVerticalAlignment(TextVAlignment::TOP);
 
     
@@ -2294,7 +2295,7 @@ LabelWrapTest::LabelWrapTest()
 
 std::string LabelWrapTest::title() const
 {
-    return "Clamp content Test.";
+    return "Clamp content Test: Word Wrap";
 }
 
 std::string LabelWrapTest::subtitle() const
