@@ -28,6 +28,7 @@
 #include "base/ccUTF8.h"
 #include "base/CCDirector.h"
 #include "2d/CCFontAtlas.h"
+#include "2d/CCFontFNT.h"
 
 NS_CC_BEGIN
 
@@ -93,6 +94,16 @@ static int getFirstWordLen(const std::u16string& utf16Text, int startIndex, int 
     return len;
 }
 
+void Label::updateBMFontScale()
+{
+    auto font = _fontAtlas->getFont();
+    if (_currentLabelType == LabelType::BMFONT) {
+        FontFNT *bmFont = (FontFNT*)font;
+        float originalFontSize = bmFont->getOriginalFontSize();
+        _bmfontScale = _bmFontSize * CC_CONTENT_SCALE_FACTOR() / originalFontSize;
+    }
+}
+
 bool Label::multilineTextWrapByWord()
 {
     int textLen = getStringLength();
@@ -108,7 +119,9 @@ bool Label::multilineTextWrapByWord()
     float lowestY = 0.f;
     FontLetterDefinition letterDef;
     Vec2 letterPosition;
-    
+
+    this->updateBMFontScale();
+
     for (int index = 0; index < textLen; )
     {
         auto character = _utf16Text[index];
@@ -231,6 +244,8 @@ bool Label::multilineTextWrapByChar()
     float lowestY = 0.f;
     FontLetterDefinition letterDef;
     Vec2 letterPosition;
+
+    this->updateBMFontScale();
 
     for (int index = 0; index < textLen; index++)
     {

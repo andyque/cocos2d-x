@@ -661,6 +661,7 @@ protected:
     void initDrawNode(const cocos2d::Size& size);
     cocos2d::DrawNode* _drawNode;
     cocos2d::Label* _label;
+    int _labelType;
 };
 
 class LabelWrapTest : public LabelLayoutBaseTest

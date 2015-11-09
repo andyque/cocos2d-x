@@ -39,6 +39,7 @@
 #include "base/CCEventListenerCustom.h"
 #include "base/CCEventDispatcher.h"
 #include "base/CCEventCustom.h"
+#include "2d/CCFontFNT.h"
 
 NS_CC_BEGIN
 
@@ -243,7 +244,6 @@ Label* Label::createWithBMFont(const std::string& bmfontFilePath, const std::str
         ret->setMaxLineWidth(maxLineWidth);
         ret->setString(text);
         ret->autorelease();
-
         return ret;
     }
     
@@ -472,6 +472,8 @@ void Label::reset()
     _isOpacityModifyRGB = false;
     _insideBounds = true;
     _enableWrap = true;
+    _bmFontSize = 0;
+    _bmfontScale = 1.0f;
 }
 
 void Label::updateShaderProgram()
@@ -561,6 +563,8 @@ bool Label::setTTFConfig(const TTFConfig& ttfConfig)
     setFontAtlas(newAtlas,ttfConfig.distanceFieldEnabled,true);
 
     _fontConfig = ttfConfig;
+
+
     if (_fontConfig.outlineSize > 0)
     {
         _fontConfig.distanceFieldEnabled = false;
@@ -578,16 +582,33 @@ bool Label::setTTFConfig(const TTFConfig& ttfConfig)
     return true;
 }
 
-bool Label::setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& imageOffset /* = Vec2::ZERO */)
+bool Label::setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& imageOffset, float fontSize)
 {
     FontAtlas *newAtlas = FontAtlasCache::getFontAtlasFNT(bmfontFilePath,imageOffset);
-
+    
     if (!newAtlas)
     {
         reset();
         return false;
     }
+
+    //asign the default fontSize
+    if (fabs(fontSize) < FLT_EPSILON) {
+        FontFNT *bmFont = (FontFNT*)newAtlas->getFont();
+        if (bmFont) {
+            float originalFontSize = bmFont->getOriginalFontSize();
+            if(fabs(_bmFontSize) < FLT_EPSILON){
+                _bmFontSize = originalFontSize / CC_CONTENT_SCALE_FACTOR();
+            }
+        }
+    }
+
+    if(fontSize > 0){
+        _bmFontSize = fontSize;
+    }
+
     _bmFontPath = bmfontFilePath;
+
     _currentLabelType = LabelType::BMFONT;
     setFontAtlas(newAtlas);
 
@@ -695,6 +716,11 @@ void Label::updateLabelLetters()
                 auto py = letterInfo.positionY - letterDef.height / 2 + _letterOffsetY;
                 letterSprite->setPosition(px, py);
 
+                if (_currentLabelType == LabelType::BMFONT && _bmFontSize > 0) {
+                    _reusedLetter->setScale(_bmfontScale);
+                }else{
+                    _reusedLetter->setScale(1.0);
+                }
                 ++it;
             }
         }
@@ -817,6 +843,13 @@ void Label::updateQuads()
                 _reusedLetter->setPosition(_lettersInfo[ctr].positionX + _linesOffsetX[_lettersInfo[ctr].lineIndex], py);
                 auto index = static_cast<int>(_batchNodes.at(letterDef.textureID)->getTextureAtlas()->getTotalQuads());
                 _lettersInfo[ctr].atlasIndex = index;
+                
+                if (_currentLabelType == LabelType::BMFONT && _bmFontSize > 0) {
+                    _reusedLetter->setScale(_bmfontScale);
+                }else{
+                    _reusedLetter->setScale(1.0);
+                }
+                
                 _batchNodes.at(letterDef.textureID)->insertQuadFromSprite(_reusedLetter, index);
             }
         }     
@@ -1147,15 +1180,18 @@ void Label::updateContent()
 #endif
 }
 
-void Label::setFontSize(float fontSize)
+void Label::setBMFontSize(float fontSize)
 {
-    if (_currentLabelType == LabelType::TTF) {
-        TTFConfig config = this->getTTFConfig();
-        config.fontSize = fontSize;
-        this->setTTFConfig(config);
-    }else if(_currentLabelType == LabelType::STRING_TEXTURE){
-        this->setSystemFontSize(fontSize);
+    if(_currentLabelType == LabelType::BMFONT){
+        this->setBMFontFilePath(_bmFontPath, Vec2::ZERO, fontSize);
+        _contentDirty = true;
     }
+    _bmFontSize = fontSize;
+}
+
+float Label::getBMFontSize()const
+{
+    return _bmFontSize;
 }
 
 void Label::onDrawShadow(GLProgram* glProgram)

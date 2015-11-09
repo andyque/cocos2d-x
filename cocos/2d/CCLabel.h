@@ -221,7 +221,7 @@ public:
     virtual const TTFConfig& getTTFConfig() const { return _fontConfig;}
 
     /** Sets a new bitmap font to Label */
-    virtual bool setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& imageOffset = Vec2::ZERO);
+    virtual bool setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& imageOffset = Vec2::ZERO, float fontSize = 0);
 
     /** Returns the bitmap font used by the Label.*/
     const std::string& getBMFontFilePath() const { return _bmFontPath;}
@@ -366,8 +366,8 @@ public:
      */
     void setMaxLineWidth(float maxLineWidth);
     float getMaxLineWidth() { return _maxLineWidth; }
-    void setFontSize(float fontSize);
-    float getFontSize()const;
+    void setBMFontSize(float fontSize);
+    float getBMFontSize()const;
     void enableWrap(bool enable);
     bool isWrapEnabled()const;
     /**
@@ -526,6 +526,7 @@ protected:
     void createShadowSpriteForSystemFont(const FontDefinition& fontDef);
 
     virtual void updateShaderProgram();
+    void updateBMFontScale();
 
     void reset();
 
@@ -619,6 +620,8 @@ protected:
 #endif
 
     bool _enableWrap;
+    float _bmFontSize;
+    float _bmfontScale;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Label);
 };

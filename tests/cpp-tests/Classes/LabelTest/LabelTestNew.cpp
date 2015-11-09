@@ -2030,7 +2030,7 @@ LabelLayoutBaseTest::LabelLayoutBaseTest()
     this->initSliders(size);
 
     this->initDrawNode(size);
-
+    
 }
 
 void LabelLayoutBaseTest::initFontSizeChange(const cocos2d::Size& size)
@@ -2046,6 +2046,7 @@ void LabelLayoutBaseTest::initFontSizeChange(const cocos2d::Size& size)
                                                  cccontrol_selector(LabelLayoutBaseTest::valueChanged),
                                                  Control::EventType::VALUE_CHANGED);
     this->addChild(stepper);
+    stepper->setName("stepper");
     stepper->setScale(0.5);
 
     fontSizeLabel->setPosition(stepper->getPosition() -
@@ -2096,12 +2097,21 @@ void LabelLayoutBaseTest::initToggleLabelTypeOption(const cocos2d::Size& size)
     checkBox->setScale(0.5);
     checkBox->setName("toggleType");
     checkBox->setSelected(true);
-    
+
+    auto stepper = (ControlStepper*)this->getChildByName("stepper");
+
     checkBox->addEventListener([=](Ref* ref, CheckBox::EventType event){
+        float fontSize = stepper->getValue();
+
         if (event == CheckBox::EventType::SELECTED) {
-            _label->setTTFConfig(_label->getTTFConfig());
+            _labelType = 0;
+            auto ttfConfig = _label->getTTFConfig();
+            ttfConfig.fontSize = fontSize;
+            _label->setTTFConfig(ttfConfig);
         }else{
+            _labelType = 1;
             _label->setBMFontFilePath("fonts/enligsh-chinese.fnt");
+            _label->setBMFontSize(fontSize);
         }
     });
     this->addChild(checkBox);
@@ -2164,6 +2174,7 @@ void LabelLayoutBaseTest::initTestLabel(const cocos2d::Size& size)
     _label->setName("Label");
     _label->setString("五六七八This is a very long sentence一二三.");
     addChild(_label);
+    _labelType = 0;
 }
 
 void LabelLayoutBaseTest::initDrawNode(const cocos2d::Size& size)
@@ -2214,7 +2225,14 @@ void LabelLayoutBaseTest::valueChanged(cocos2d::Ref *sender, cocos2d::extension:
     auto fontSizeLabel = (Label*)this->getChildByName("fontSize");
     float fontSize = (float)pControl->getValue();
     fontSizeLabel->setString(StringUtils::format("font size:%d", (int)fontSize));
-    _label->setFontSize(fontSize);
+    
+    if (_labelType == 0) {
+        auto ttfConfig = _label->getTTFConfig();
+        ttfConfig.fontSize = fontSize;
+        _label->setTTFConfig(ttfConfig);
+    }else if(_labelType == 1){
+        _label->setBMFontSize(fontSize);
+    }
 }
 
 void LabelLayoutBaseTest::updateDrawNodeSize(const cocos2d::Size &drawNodeSize)
