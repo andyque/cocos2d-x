@@ -664,12 +664,23 @@ protected:
     int _labelType;
 };
 
-class LabelWrapTest : public LabelLayoutBaseTest
+class LabelWrapByWordTest : public LabelLayoutBaseTest
 {
 public:
-    CREATE_FUNC(LabelWrapTest);
+    CREATE_FUNC(LabelWrapByWordTest);
 
-    LabelWrapTest();
+    LabelWrapByWordTest();
+
+    virtual std::string title() const override;
+    virtual std::string subtitle() const override;
+};
+
+class LabelWrapByCharTest : public LabelLayoutBaseTest
+{
+public:
+    CREATE_FUNC(LabelWrapByCharTest);
+
+    LabelWrapByCharTest();
 
     virtual std::string title() const override;
     virtual std::string subtitle() const override;

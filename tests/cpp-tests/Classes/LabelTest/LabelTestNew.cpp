@@ -89,7 +89,8 @@ NewLabelTests::NewLabelTests()
     ADD_TEST_CASE(LabelIssue10688Test);
     ADD_TEST_CASE(LabelIssue13202Test);
     ADD_TEST_CASE(LabelIssue9500Test);
-    ADD_TEST_CASE(LabelWrapTest);
+    ADD_TEST_CASE(LabelWrapByWordTest);
+    ADD_TEST_CASE(LabelWrapByCharTest);
 };
 
 LabelFNTColorAndOpacity::LabelFNTColorAndOpacity()
@@ -2258,7 +2259,7 @@ void LabelLayoutBaseTest::updateDrawNodeSize(const cocos2d::Size &drawNodeSize)
 
 }
 
-LabelWrapTest::LabelWrapTest()
+LabelWrapByWordTest::LabelWrapByWordTest()
 {
     auto center = VisibleRect::center();
     auto winSize = Director::getInstance()->getVisibleSize();
@@ -2267,6 +2268,7 @@ LabelWrapTest::LabelWrapTest()
     auto labelSize = _label->getContentSize();
 //    _label->setLineBreakWithoutSpace(true);
     _label->setLineSpacing(5);
+    _label->setAdditionalKerning(2);
     _label->setVerticalAlignment(TextVAlignment::TOP);
 
     
@@ -2293,12 +2295,58 @@ LabelWrapTest::LabelWrapTest()
     });
 }
 
-std::string LabelWrapTest::title() const
+std::string LabelWrapByWordTest::title() const
 {
     return "Clamp content Test: Word Wrap";
 }
 
-std::string LabelWrapTest::subtitle() const
+std::string LabelWrapByWordTest::subtitle() const
+{
+    return "";
+}
+
+LabelWrapByCharTest::LabelWrapByCharTest()
+{
+    auto center = VisibleRect::center();
+    auto winSize = Director::getInstance()->getVisibleSize();
+    auto slider1 = (ui::Slider*)this->getChildByTag(1);
+    auto slider2 = (ui::Slider*)this->getChildByTag(2);
+    auto labelSize = _label->getContentSize();
+   _label->setLineBreakWithoutSpace(true);
+    _label->setLineSpacing(5);
+    _label->setAdditionalKerning(2);
+    _label->setVerticalAlignment(TextVAlignment::TOP);
+
+
+    slider1->addEventListener([=](Ref* ref, Slider::EventType event){
+        float percent = slider1->getPercent();
+        auto drawNodeSize = Size(percent / 100.0 * winSize.width, labelSize.height);
+        if(drawNodeSize.width <=0){
+            drawNodeSize.width = 0.1f;
+        }
+        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
+        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
+        this->updateDrawNodeSize(drawNodeSize);
+    });
+
+    slider2->addEventListener([=](Ref* ref, Slider::EventType event){
+        float percent = slider2->getPercent();
+        auto drawNodeSize = Size( labelSize.width, percent / 100.0 * winSize.height);
+        if(drawNodeSize.height <= 0){
+            drawNodeSize.height = 0.1f;
+        }
+        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
+        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
+        this->updateDrawNodeSize(drawNodeSize);
+    });
+}
+
+std::string LabelWrapByCharTest::title() const
+{
+    return "Clamp content Test: Char Wrap";
+}
+
+std::string LabelWrapByCharTest::subtitle() const
 {
     return "";
 }

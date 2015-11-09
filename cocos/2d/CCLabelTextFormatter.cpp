@@ -263,7 +263,7 @@ bool Label::multilineTextWrapByChar()
             letterRight = 0.f;
             lineIndex++;
             nextLetterX = 0.f;
-            nextLetterY -= _lineHeight + lineSpacing;
+            nextLetterY -= _lineHeight * _bmfontScale + lineSpacing;
             recordPlaceholderInfo(index, character);
             continue;
         }
@@ -275,33 +275,33 @@ bool Label::multilineTextWrapByChar()
             continue;
         }
 
-        auto letterX = (nextLetterX + letterDef.offsetX) / contentScaleFactor;
-        if (_enableWrap && _maxLineWidth > 0.f && nextLetterX > 0.f && letterX + letterDef.width > _maxLineWidth)
+        auto letterX = (nextLetterX + letterDef.offsetX * _bmfontScale) / contentScaleFactor;
+        if (_enableWrap && _maxLineWidth > 0.f && nextLetterX > 0.f && letterX + letterDef.width * _bmfontScale > _maxLineWidth)
         {
             _linesWidth.push_back(letterRight);
             letterRight = 0.f;
             lineIndex++;
             nextLetterX = 0.f;
-            nextLetterY -= _lineHeight + lineSpacing;
-            letterPosition.x = letterDef.offsetX / contentScaleFactor;
+            nextLetterY -= _lineHeight * _bmfontScale + lineSpacing;
+            letterPosition.x = letterDef.offsetX * _bmfontScale / contentScaleFactor;
         }
         else
         {
             letterPosition.x = letterX;
         }
-        letterPosition.y = (nextLetterY - letterDef.offsetY) / contentScaleFactor;
+        letterPosition.y = (nextLetterY - letterDef.offsetY * _bmfontScale) / contentScaleFactor;
         recordLetterInfo(letterPosition, character, index, lineIndex);
 
         if (_horizontalKernings && index < textLen - 1)
             nextLetterX += _horizontalKernings[index + 1];
-        nextLetterX += letterDef.xAdvance + _additionalKerning;
+        nextLetterX += letterDef.xAdvance * _bmfontScale + _additionalKerning;
 
         letterRight = letterPosition.x + letterDef.width * _bmfontScale;
 
         if (highestY < letterPosition.y)
             highestY = letterPosition.y;
-        if (lowestY > letterPosition.y - letterDef.height)
-            lowestY = letterPosition.y - letterDef.height;
+        if (lowestY > letterPosition.y - letterDef.height * _bmfontScale)
+            lowestY = letterPosition.y - letterDef.height * _bmfontScale;
         if (longestLine < letterRight)
             longestLine = letterRight;
     }
@@ -309,7 +309,7 @@ bool Label::multilineTextWrapByChar()
     _linesWidth.push_back(letterRight);
 
     _numberOfLines = lineIndex + 1;
-    _textDesiredHeight = (_numberOfLines * _lineHeight) / contentScaleFactor;
+    _textDesiredHeight = (_numberOfLines * _lineHeight * _bmfontScale) / contentScaleFactor;
     if (_numberOfLines > 1)
         _textDesiredHeight += (_numberOfLines - 1) * _lineSpacing;
     Size contentSize(_labelWidth, _labelHeight);
