@@ -474,6 +474,7 @@ void Label::reset()
     _enableWrap = true;
     _bmFontSize = 0;
     _bmfontScale = 1.0f;
+    _overflow = Overflow::CLAMP;
 }
 
 void Label::updateShaderProgram()
@@ -1821,6 +1822,20 @@ void Label::enableWrap(bool enable)
 bool Label::isWrapEnabled()const
 {
     return this->_enableWrap;
+}
+
+void Label::setOverflow(Overflow overflow)
+{
+    if(_overflow == overflow){
+        return;
+    }
+
+    _overflow = overflow;
+}
+
+Label::Overflow Label::getOverflow()const
+{
+    return _overflow;
 }
 
 NS_CC_END

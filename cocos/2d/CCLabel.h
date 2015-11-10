@@ -95,6 +95,11 @@ class EventListenerCustom;
 class CC_DLL Label : public Node, public LabelProtocol, public BlendProtocol
 {
 public:
+    enum class Overflow
+    {
+        SHRINK,
+        CLAMP
+    };
     /// @name Creators
     /// @{
 
@@ -370,6 +375,8 @@ public:
     float getBMFontSize()const;
     void enableWrap(bool enable);
     bool isWrapEnabled()const;
+    void setOverflow(Overflow overflow);
+    Overflow getOverflow()const;
     /**
      * Makes the Label exactly this untransformed width.
      *
@@ -622,6 +629,7 @@ protected:
     bool _enableWrap;
     float _bmFontSize;
     float _bmfontScale;
+    Overflow _overflow;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Label);
 };

@@ -91,6 +91,7 @@ NewLabelTests::NewLabelTests()
     ADD_TEST_CASE(LabelIssue9500Test);
     ADD_TEST_CASE(LabelWrapByWordTest);
     ADD_TEST_CASE(LabelWrapByCharTest);
+    ADD_TEST_CASE(LabelShrinkByWordTest);
 };
 
 LabelFNTColorAndOpacity::LabelFNTColorAndOpacity()
@@ -2028,10 +2029,9 @@ LabelLayoutBaseTest::LabelLayoutBaseTest()
 
     this->initAlignmentOption(size);
 
-    this->initSliders(size);
-
     this->initDrawNode(size);
-    
+
+    this->initSliders(size);
 }
 
 void LabelLayoutBaseTest::initFontSizeChange(const cocos2d::Size& size)
@@ -2164,6 +2164,30 @@ void LabelLayoutBaseTest::initSliders(const cocos2d::Size& size)
     slider2->setRotation(90);
     slider2->setPercent(52);
     addChild(slider2);
+    auto winSize = Director::getInstance()->getVisibleSize();
+    auto labelSize = _label->getContentSize();
+
+    slider->addEventListener([=](Ref* ref, Slider::EventType event){
+        float percent = slider->getPercent();
+        auto drawNodeSize = Size(percent / 100.0 * winSize.width, labelSize.height);
+        if(drawNodeSize.width <=0){
+            drawNodeSize.width = 0.1f;
+        }
+        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
+        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
+        this->updateDrawNodeSize(drawNodeSize);
+    });
+
+    slider2->addEventListener([=](Ref* ref, Slider::EventType event){
+        float percent = slider2->getPercent();
+        auto drawNodeSize = Size( labelSize.width, percent / 100.0 * winSize.height);
+        if(drawNodeSize.height <= 0){
+            drawNodeSize.height = 0.1f;
+        }
+        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
+        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
+        this->updateDrawNodeSize(drawNodeSize);
+    });
 }
 
 void LabelLayoutBaseTest::initTestLabel(const cocos2d::Size& size)
@@ -2261,38 +2285,11 @@ void LabelLayoutBaseTest::updateDrawNodeSize(const cocos2d::Size &drawNodeSize)
 
 LabelWrapByWordTest::LabelWrapByWordTest()
 {
-    auto center = VisibleRect::center();
-    auto winSize = Director::getInstance()->getVisibleSize();
-    auto slider1 = (ui::Slider*)this->getChildByTag(1);
-    auto slider2 = (ui::Slider*)this->getChildByTag(2);
-    auto labelSize = _label->getContentSize();
-//    _label->setLineBreakWithoutSpace(true);
     _label->setLineSpacing(5);
     _label->setAdditionalKerning(2);
-    _label->setVerticalAlignment(TextVAlignment::TOP);
+    _label->setVerticalAlignment(TextVAlignment::CENTER);
+    _label->setOverflow(Label::Overflow::CLAMP);
 
-    
-    slider1->addEventListener([=](Ref* ref, Slider::EventType event){
-        float percent = slider1->getPercent();
-        auto drawNodeSize = Size(percent / 100.0 * winSize.width, labelSize.height);
-        if(drawNodeSize.width <=0){
-            drawNodeSize.width = 0.1f;
-        }
-        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
-        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
-        this->updateDrawNodeSize(drawNodeSize);
-    });
-
-    slider2->addEventListener([=](Ref* ref, Slider::EventType event){
-        float percent = slider2->getPercent();
-        auto drawNodeSize = Size( labelSize.width, percent / 100.0 * winSize.height);
-        if(drawNodeSize.height <= 0){
-            drawNodeSize.height = 0.1f;
-        }
-        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
-        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
-        this->updateDrawNodeSize(drawNodeSize);
-    });
 }
 
 std::string LabelWrapByWordTest::title() const
@@ -2307,38 +2304,12 @@ std::string LabelWrapByWordTest::subtitle() const
 
 LabelWrapByCharTest::LabelWrapByCharTest()
 {
-    auto center = VisibleRect::center();
-    auto winSize = Director::getInstance()->getVisibleSize();
-    auto slider1 = (ui::Slider*)this->getChildByTag(1);
-    auto slider2 = (ui::Slider*)this->getChildByTag(2);
-    auto labelSize = _label->getContentSize();
    _label->setLineBreakWithoutSpace(true);
     _label->setLineSpacing(5);
     _label->setAdditionalKerning(2);
     _label->setVerticalAlignment(TextVAlignment::TOP);
+    _label->setOverflow(Label::Overflow::CLAMP);
 
-
-    slider1->addEventListener([=](Ref* ref, Slider::EventType event){
-        float percent = slider1->getPercent();
-        auto drawNodeSize = Size(percent / 100.0 * winSize.width, labelSize.height);
-        if(drawNodeSize.width <=0){
-            drawNodeSize.width = 0.1f;
-        }
-        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
-        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
-        this->updateDrawNodeSize(drawNodeSize);
-    });
-
-    slider2->addEventListener([=](Ref* ref, Slider::EventType event){
-        float percent = slider2->getPercent();
-        auto drawNodeSize = Size( labelSize.width, percent / 100.0 * winSize.height);
-        if(drawNodeSize.height <= 0){
-            drawNodeSize.height = 0.1f;
-        }
-        _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
-        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
-        this->updateDrawNodeSize(drawNodeSize);
-    });
 }
 
 std::string LabelWrapByCharTest::title() const
@@ -2347,6 +2318,24 @@ std::string LabelWrapByCharTest::title() const
 }
 
 std::string LabelWrapByCharTest::subtitle() const
+{
+    return "";
+}
+
+LabelShrinkByWordTest::LabelShrinkByWordTest()
+{
+    _label->setLineSpacing(5);
+    _label->setAdditionalKerning(2);
+    _label->setVerticalAlignment(TextVAlignment::TOP);
+    _label->setOverflow(Label::Overflow::SHRINK);
+}
+
+std::string LabelShrinkByWordTest::title() const
+{
+    return "Shrink content Test: Word Wrap";
+}
+
+std::string LabelShrinkByWordTest::subtitle() const
 {
     return "";
 }
