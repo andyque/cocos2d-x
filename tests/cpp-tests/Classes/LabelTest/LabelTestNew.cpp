@@ -92,6 +92,7 @@ NewLabelTests::NewLabelTests()
     ADD_TEST_CASE(LabelWrapByWordTest);
     ADD_TEST_CASE(LabelWrapByCharTest);
     ADD_TEST_CASE(LabelShrinkByWordTest);
+    ADD_TEST_CASE(LabelResizeTest);
 };
 
 LabelFNTColorAndOpacity::LabelFNTColorAndOpacity()
@@ -2078,6 +2079,7 @@ void LabelLayoutBaseTest::initWrapOption(const cocos2d::Size& size)
         }else{
             _label->enableWrap(false);
         }
+        this->updateDrawNodeSize(_label->getContentSize());
     });
     this->addChild(checkBox);
 }
@@ -2174,7 +2176,6 @@ void LabelLayoutBaseTest::initSliders(const cocos2d::Size& size)
             drawNodeSize.width = 0.1f;
         }
         _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
-        // _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
         this->updateDrawNodeSize(drawNodeSize);
     });
 
@@ -2185,7 +2186,6 @@ void LabelLayoutBaseTest::initSliders(const cocos2d::Size& size)
             drawNodeSize.height = 0.1f;
         }
         _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
-        // _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
         this->updateDrawNodeSize(drawNodeSize);
     });
 }
@@ -2258,6 +2258,7 @@ void LabelLayoutBaseTest::valueChanged(cocos2d::Ref *sender, cocos2d::extension:
     }else if(_labelType == 1){
         _label->setBMFontSize(fontSize);
     }
+    this->updateDrawNodeSize(_label->getContentSize());
 }
 
 void LabelLayoutBaseTest::updateDrawNodeSize(const cocos2d::Size &drawNodeSize)
@@ -2337,6 +2338,42 @@ std::string LabelShrinkByWordTest::title() const
 }
 
 std::string LabelShrinkByWordTest::subtitle() const
+{
+    return "";
+}
+
+LabelResizeTest::LabelResizeTest()
+{
+    _label->setLineSpacing(5);
+    _label->setAdditionalKerning(2);
+    _label->setString("This is  Hello zilongshanren \nWorld zilongshanren\n zilongshanren   hehe I love 一二三");
+    _label->setVerticalAlignment(TextVAlignment::TOP);
+    _label->setOverflow(Label::Overflow::RESIZE);
+
+
+    this->updateDrawNodeSize(_label->getContentSize());
+
+    auto slider1 = (ui::Slider*)this->getChildByTag(1);
+    slider1->setTouchEnabled(false);
+
+    auto slider2 = (ui::Slider*)this->getChildByTag(2);
+    slider2->setTouchEnabled(false);
+
+    auto checkBox = (ui::CheckBox*)this->getChildByName("toggleWrap");
+    checkBox->setSelected(false);
+    checkBox->setTouchEnabled(false);
+
+    auto stepper = (ControlStepper*)this->getChildByName("stepper");
+    stepper->setValue(12);
+
+}
+
+std::string LabelResizeTest::title() const
+{
+    return "Resize content Test";
+}
+
+std::string LabelResizeTest::subtitle() const
 {
     return "";
 }

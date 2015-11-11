@@ -1878,9 +1878,10 @@ void Label::setGlobalZOrder(float globalZOrder)
 
 void Label::enableWrap(bool enable)
 {
-    if(enable == _enableWrap){
+    if(enable == _enableWrap || _overflow == Overflow::RESIZE){
         return;
     }
+
     this->_enableWrap = enable;
     _contentDirty = true;
 }
@@ -1897,6 +1898,10 @@ void Label::setOverflow(Overflow overflow)
     }
 
     _overflow = overflow;
+    if(_overflow == Overflow::RESIZE){
+        this->setDimensions(0, 0);
+        this->enableWrap(false);
+    }
 }
 
 Label::Overflow Label::getOverflow()const

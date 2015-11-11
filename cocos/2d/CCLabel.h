@@ -98,7 +98,8 @@ public:
     enum class Overflow
     {
         SHRINK,
-        CLAMP
+        CLAMP,
+        RESIZE
     };
     /// @name Creators
     /// @{

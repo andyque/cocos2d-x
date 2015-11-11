@@ -219,6 +219,7 @@ bool Label::multilineTextWrapByWord()
         contentSize.width = longestLine;
     if (_labelHeight <= 0.f)
         contentSize.height = _textDesiredHeight;
+    
     setContentSize(contentSize);
 
     _tailoredTopY = contentSize.height;
@@ -317,6 +318,7 @@ bool Label::multilineTextWrapByChar()
         contentSize.width = longestLine;
     if (_labelHeight <= 0.f)
         contentSize.height = _textDesiredHeight;
+
     setContentSize(contentSize);
 
     _tailoredTopY = contentSize.height;

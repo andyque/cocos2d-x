@@ -696,4 +696,15 @@ public:
     virtual std::string title() const override;
     virtual std::string subtitle() const override;
 };
+
+class LabelResizeTest : public LabelLayoutBaseTest
+{
+public:
+    CREATE_FUNC(LabelResizeTest);
+
+    LabelResizeTest();
+
+    virtual std::string title() const override;
+    virtual std::string subtitle() const override;
+};
 #endif
