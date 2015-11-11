@@ -475,6 +475,8 @@ void Label::reset()
     _bmFontSize = 0;
     _bmfontScale = 1.0f;
     _overflow = Overflow::CLAMP;
+    _originalFontSize = 0.0f;
+    
 }
 
 void Label::updateShaderProgram()
@@ -551,36 +553,8 @@ void Label::setFontAtlas(FontAtlas* atlas,bool distanceFieldEnabled /* = false *
 
 bool Label::setTTFConfig(const TTFConfig& ttfConfig)
 {
-    FontAtlas *newAtlas = FontAtlasCache::getFontAtlasTTF(&ttfConfig);
-
-    if (!newAtlas)
-    {
-        reset();
-        return false;
-    }
-    _systemFontDirty = false;
-
-    _currentLabelType = LabelType::TTF;
-    setFontAtlas(newAtlas,ttfConfig.distanceFieldEnabled,true);
-
-    _fontConfig = ttfConfig;
-
-
-    if (_fontConfig.outlineSize > 0)
-    {
-        _fontConfig.distanceFieldEnabled = false;
-        _useDistanceField = false;
-        _useA8Shader = false;
-        _currLabelEffect = LabelEffect::OUTLINE;
-        updateShaderProgram();
-    }
-    else 
-    {
-        _currLabelEffect = LabelEffect::NORMAL;
-        updateShaderProgram();
-    }
-
-    return true;
+    _originalFontSize = ttfConfig.fontSize;
+    return setTTFConfigInternal(ttfConfig);
 }
 
 bool Label::setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& imageOffset, float fontSize)
@@ -662,7 +636,22 @@ void Label::setDimensions(float width, float height)
 
         _maxLineWidth = width;
         _contentDirty = true;
-    }  
+        
+        if (_originalFontSize > 0) {
+            this->restoreFontSize();
+        }
+    }
+}
+
+void Label::restoreFontSize()
+{
+    if(_currentLabelType == LabelType::TTF){
+        auto ttfConfig = this->getTTFConfig();
+        ttfConfig.fontSize = _originalFontSize;
+        this->setTTFConfigInternal(ttfConfig);
+    }else if(_currentLabelType == LabelType::BMFONT){
+        this->setBMFontSizeInternal(_originalFontSize);
+    }
 }
 
 void Label::setLineBreakWithoutSpace(bool breakWithoutSpace)
@@ -728,55 +717,63 @@ void Label::updateLabelLetters()
     }
 }
 
-void Label::alignText()
+bool Label::alignText()
 {
     if (_fontAtlas == nullptr || _utf16Text.empty())
     {
         setContentSize(Size::ZERO);
-        return;
+        return true;
     }
 
-    _fontAtlas->prepareLetterDefinitions(_utf16Text);
-    auto& textures = _fontAtlas->getTextures();
-    if (textures.size() > _batchNodes.size())
-    {
-        for (auto index = _batchNodes.size(); index < textures.size(); ++index)
+    bool ret = true;
+    do {
+        _fontAtlas->prepareLetterDefinitions(_utf16Text);
+        auto& textures = _fontAtlas->getTextures();
+        if (textures.size() > _batchNodes.size())
         {
-            auto batchNode = SpriteBatchNode::createWithTexture(textures.at(index));
-            if (batchNode)
+            for (auto index = _batchNodes.size(); index < textures.size(); ++index)
             {
-                _isOpacityModifyRGB = batchNode->getTexture()->hasPremultipliedAlpha();
-                _blendFunc = batchNode->getBlendFunc();
-                batchNode->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
-                batchNode->setPosition(Vec2::ZERO);
-                _batchNodes.pushBack(batchNode);
+                auto batchNode = SpriteBatchNode::createWithTexture(textures.at(index));
+                if (batchNode)
+                {
+                    _isOpacityModifyRGB = batchNode->getTexture()->hasPremultipliedAlpha();
+                    _blendFunc = batchNode->getBlendFunc();
+                    batchNode->setAnchorPoint(Vec2::ANCHOR_TOP_LEFT);
+                    batchNode->setPosition(Vec2::ZERO);
+                    _batchNodes.pushBack(batchNode);
+                }
             }
         }
-    }
-    if (_batchNodes.empty())
-    {
-        return;
-    }
-    _reusedLetter->setBatchNode(_batchNodes.at(0));
-
-    _lengthOfString = 0;
-    _textDesiredHeight = 0.f;
-    _linesWidth.clear();
-    if (_maxLineWidth > 0.f && !_lineBreakWithoutSpaces)
-    {
-        multilineTextWrapByWord();
-    }
-    else
-    {
-        multilineTextWrapByChar();
-    }
-    computeAlignmentOffset();
-
-    updateQuads();
-
-    updateLabelLetters();
-
-    updateColor();
+        if (_batchNodes.empty())
+        {
+            return true;
+        }
+        _reusedLetter->setBatchNode(_batchNodes.at(0));
+        
+        _lengthOfString = 0;
+        _textDesiredHeight = 0.f;
+        _linesWidth.clear();
+        if (_maxLineWidth > 0.f && !_lineBreakWithoutSpaces)
+        {
+            multilineTextWrapByWord();
+        }
+        else
+        {
+            multilineTextWrapByChar();
+        }
+        computeAlignmentOffset();
+        
+        if(!updateQuads()){
+            ret = false;
+    
+            break;
+        }
+    
+        updateLabelLetters();
+        
+        updateColor();
+    }while (0);
+    return ret;
 }
 
 bool Label::computeHorizontalKernings(const std::u16string& stringToRender)
@@ -796,13 +793,15 @@ bool Label::computeHorizontalKernings(const std::u16string& stringToRender)
         return true;
 }
 
-void Label::updateQuads()
+bool Label::updateQuads()
 {
+    bool ret = true;
     for (auto&& batchNode : _batchNodes)
     {
         batchNode->getTextureAtlas()->removeAllQuads();
     }
     
+    bool letterClamp = false;
     for (int ctr = 0; ctr < _lengthOfString; ++ctr)
     {
         if (_lettersInfo[ctr].valid)
@@ -833,7 +832,12 @@ void Label::updateQuads()
                 auto px = _lettersInfo[ctr].positionX + letterDef.width/2;
                 if(_labelWidth > 0.f){
                     if (px > _contentSize.width) {
-                        _reusedRect.size.width = 0;
+                        if(_overflow == Overflow::CLAMP){
+                            _reusedRect.size.width = 0;
+                        }else if(_overflow == Overflow::SHRINK){
+                            letterClamp = true;
+                            break;
+                        }
                     }
                 }
             }
@@ -855,6 +859,67 @@ void Label::updateQuads()
             }
         }     
     }
+    
+    if (letterClamp) {
+        this->scaleFontSizeDown();
+        ret = false;
+    }
+
+    return ret;
+}
+
+bool Label::setTTFConfigInternal(const TTFConfig& ttfConfig)
+{
+    FontAtlas *newAtlas = FontAtlasCache::getFontAtlasTTF(&ttfConfig);
+
+    if (!newAtlas)
+    {
+        reset();
+        return false;
+    }
+    _systemFontDirty = false;
+
+    _currentLabelType = LabelType::TTF;
+    setFontAtlas(newAtlas,ttfConfig.distanceFieldEnabled,true);
+
+    _fontConfig = ttfConfig;
+
+    if (_fontConfig.outlineSize > 0)
+    {
+        _fontConfig.distanceFieldEnabled = false;
+        _useDistanceField = false;
+        _useA8Shader = false;
+        _currLabelEffect = LabelEffect::OUTLINE;
+        updateShaderProgram();
+    }
+    else
+    {
+        _currLabelEffect = LabelEffect::NORMAL;
+        updateShaderProgram();
+    }
+    return true;
+}
+
+void Label::setBMFontSizeInternal(float fontSize)
+{
+    if(_currentLabelType == LabelType::BMFONT){
+        this->setBMFontFilePath(_bmFontPath, Vec2::ZERO, fontSize);
+        _contentDirty = true;
+    }
+    _bmFontSize = fontSize;
+}
+
+void Label::scaleFontSizeDown()
+{
+    if(_currentLabelType == LabelType::TTF){
+        auto ttfConfig = this->getTTFConfig();
+        ttfConfig.fontSize -= 1;
+        this->setTTFConfigInternal(ttfConfig);
+    }else if(_currentLabelType == LabelType::BMFONT){
+        this->setBMFontSizeInternal(this->getBMFontSize() - 1);
+    }
+    
+    _contentDirty = true;
 }
 
 void Label::enableGlow(const Color4B& glowColor)
@@ -1145,6 +1210,7 @@ void Label::updateContent()
 
     CC_SAFE_RELEASE_NULL(_textSprite);
     CC_SAFE_RELEASE_NULL(_shadowNode);
+    bool updateFinished = true;
 
     if (_fontAtlas)
     {
@@ -1155,7 +1221,7 @@ void Label::updateContent()
         }
 
         computeHorizontalKernings(_utf16Text);
-        alignText();
+        updateFinished = alignText();
     }
     else
     {
@@ -1166,7 +1232,9 @@ void Label::updateContent()
             createShadowSpriteForSystemFont(fontDef);
         }
     }
-    _contentDirty = false;
+    if(updateFinished){
+        _contentDirty = false;
+    }
 
 #if CC_LABEL_DEBUG_DRAW
     _debugDrawNode->clear();
@@ -1183,11 +1251,8 @@ void Label::updateContent()
 
 void Label::setBMFontSize(float fontSize)
 {
-    if(_currentLabelType == LabelType::BMFONT){
-        this->setBMFontFilePath(_bmFontPath, Vec2::ZERO, fontSize);
-        _contentDirty = true;
-    }
-    _bmFontSize = fontSize;
+    this->setBMFontSizeInternal(fontSize);
+    _originalFontSize = fontSize;
 }
 
 float Label::getBMFontSize()const
@@ -1438,6 +1503,7 @@ void Label::setSystemFontSize(float fontSize)
     if (_systemFontSize != fontSize)
     {
         _systemFontSize = fontSize;
+        _originalFontSize = fontSize;
         _systemFontDirty = true;
     }
 }

@@ -520,20 +520,24 @@ protected:
     bool multilineTextWrapByWord();
 
     void updateLabelLetters();
-    virtual void alignText();
+    virtual bool alignText();
     void computeAlignmentOffset();
     bool computeHorizontalKernings(const std::u16string& stringToRender);
 
     void recordLetterInfo(const cocos2d::Vec2& point, char16_t utf16Char, int letterIndex, int lineIndex);
     void recordPlaceholderInfo(int letterIndex, char16_t utf16Char);
     
-    void updateQuads();
+    bool updateQuads();
 
     void createSpriteForSystemFont(const FontDefinition& fontDef);
     void createShadowSpriteForSystemFont(const FontDefinition& fontDef);
 
     virtual void updateShaderProgram();
     void updateBMFontScale();
+    void scaleFontSizeDown();
+    bool setTTFConfigInternal(const TTFConfig& ttfConfig);
+    void setBMFontSizeInternal(float fontSize);
+    void restoreFontSize();
 
     void reset();
 
@@ -630,6 +634,7 @@ protected:
     float _bmFontSize;
     float _bmfontScale;
     Overflow _overflow;
+    float _originalFontSize;
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Label);
 };

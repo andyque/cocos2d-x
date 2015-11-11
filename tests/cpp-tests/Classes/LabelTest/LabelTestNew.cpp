@@ -2099,10 +2099,10 @@ void LabelLayoutBaseTest::initToggleLabelTypeOption(const cocos2d::Size& size)
     checkBox->setName("toggleType");
     checkBox->setSelected(true);
 
-    auto stepper = (ControlStepper*)this->getChildByName("stepper");
+   auto stepper = (ControlStepper*)this->getChildByName("stepper");
 
     checkBox->addEventListener([=](Ref* ref, CheckBox::EventType event){
-        float fontSize = stepper->getValue();
+       float fontSize = stepper->getValue();
 
         if (event == CheckBox::EventType::SELECTED) {
             _labelType = 0;
@@ -2174,7 +2174,7 @@ void LabelLayoutBaseTest::initSliders(const cocos2d::Size& size)
             drawNodeSize.width = 0.1f;
         }
         _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
-        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
+        // _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
         this->updateDrawNodeSize(drawNodeSize);
     });
 
@@ -2185,7 +2185,7 @@ void LabelLayoutBaseTest::initSliders(const cocos2d::Size& size)
             drawNodeSize.height = 0.1f;
         }
         _label->setDimensions(drawNodeSize.width, drawNodeSize.height);
-        _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
+        // _label->setContentSize(Size(drawNodeSize.width, drawNodeSize.height));
         this->updateDrawNodeSize(drawNodeSize);
     });
 }
@@ -2326,6 +2326,7 @@ LabelShrinkByWordTest::LabelShrinkByWordTest()
 {
     _label->setLineSpacing(5);
     _label->setAdditionalKerning(2);
+    _label->setString("This is  Hello World  hehe I love 一二三");
     _label->setVerticalAlignment(TextVAlignment::TOP);
     _label->setOverflow(Label::Overflow::SHRINK);
 }
