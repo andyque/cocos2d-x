@@ -519,6 +519,10 @@ protected:
 
     bool multilineTextWrapByChar();
     bool multilineTextWrapByWord();
+    void shrinkLabelToContentSize();
+    bool isHorizontalClamp();
+    bool isVerticalClampByChar();
+    bool isVerticalClampByWord();
 
     void updateLabelLetters();
     virtual bool alignText();
@@ -535,7 +539,7 @@ protected:
 
     virtual void updateShaderProgram();
     void updateBMFontScale();
-    void scaleFontSizeDown();
+    void scaleFontSizeDown(float fontSize);
     bool setTTFConfigInternal(const TTFConfig& ttfConfig);
     void setBMFontSizeInternal(float fontSize);
     void restoreFontSize();

@@ -472,7 +472,7 @@ void Label::reset()
     _isOpacityModifyRGB = false;
     _insideBounds = true;
     _enableWrap = true;
-    _bmFontSize = 0;
+    _bmFontSize = -1;
     _bmfontScale = 1.0f;
     _overflow = Overflow::CLAMP;
     _originalFontSize = 0.0f;
@@ -572,7 +572,7 @@ bool Label::setBMFontFilePath(const std::string& bmfontFilePath, const Vec2& ima
         FontFNT *bmFont = (FontFNT*)newAtlas->getFont();
         if (bmFont) {
             float originalFontSize = bmFont->getOriginalFontSize();
-            if(fabs(_bmFontSize) < FLT_EPSILON){
+            if(fabs(_bmFontSize+1) < FLT_EPSILON){
                 _bmFontSize = originalFontSize / CC_CONTENT_SCALE_FACTOR();
             }
         }
@@ -618,6 +618,9 @@ void Label::setAlignment(TextHAlignment hAlignment,TextVAlignment vAlignment)
 
 void Label::setMaxLineWidth(float maxLineWidth)
 {
+    if(_overflow == Overflow::RESIZE){
+        return;
+    }
     if (_labelWidth == 0 && _maxLineWidth != maxLineWidth)
     {
         _maxLineWidth = maxLineWidth;
@@ -627,6 +630,9 @@ void Label::setMaxLineWidth(float maxLineWidth)
 
 void Label::setDimensions(float width, float height)
 {
+    if(_overflow == Overflow::RESIZE){
+        return;
+    }
     if (height != _labelHeight || width != _labelWidth)
     {
         _labelWidth = width;
@@ -636,9 +642,11 @@ void Label::setDimensions(float width, float height)
 
         _maxLineWidth = width;
         _contentDirty = true;
-        
-        if (_originalFontSize > 0) {
-            this->restoreFontSize();
+
+        if(_overflow == Overflow::SHRINK){
+            if (_originalFontSize > 0) {
+                this->restoreFontSize();
+            }
         }
     }
 }
@@ -709,7 +717,11 @@ void Label::updateLabelLetters()
                 if (_currentLabelType == LabelType::BMFONT && _bmFontSize > 0) {
                     _reusedLetter->setScale(_bmfontScale);
                 }else{
-                    _reusedLetter->setScale(1.0);
+                    if(fabs(_bmFontSize)<FLT_EPSILON){
+                        _reusedLetter->setScale(0);
+                    }else{
+                        _reusedLetter->setScale(1.0);
+                    }
                 }
                 ++it;
             }
@@ -836,6 +848,8 @@ bool Label::updateQuads()
                             _reusedRect.size.width = 0;
                         }else if(_overflow == Overflow::SHRINK){
                             letterClamp = true;
+                            this->shrinkLabelToContentSize();
+                            ret = false;
                             break;
                         }
                     }
@@ -852,7 +866,11 @@ bool Label::updateQuads()
                 if (_currentLabelType == LabelType::BMFONT && _bmFontSize > 0) {
                     _reusedLetter->setScale(_bmfontScale);
                 }else{
-                    _reusedLetter->setScale(1.0);
+                    if(fabs(_bmFontSize)<FLT_EPSILON){
+                        _reusedLetter->setScale(0);
+                    }else{
+                        _reusedLetter->setScale(1.0);
+                    }
                 }
                 
                 _batchNodes.at(letterDef.textureID)->insertQuadFromSprite(_reusedLetter, index);
@@ -860,10 +878,6 @@ bool Label::updateQuads()
         }     
     }
     
-    if (letterClamp) {
-        this->scaleFontSizeDown();
-        ret = false;
-    }
 
     return ret;
 }
@@ -909,14 +923,15 @@ void Label::setBMFontSizeInternal(float fontSize)
     _bmFontSize = fontSize;
 }
 
-void Label::scaleFontSizeDown()
+void Label::scaleFontSizeDown(float fontSize)
 {
+    
     if(_currentLabelType == LabelType::TTF){
         auto ttfConfig = this->getTTFConfig();
-        ttfConfig.fontSize -= 1;
+        ttfConfig.fontSize = fontSize;
         this->setTTFConfigInternal(ttfConfig);
     }else if(_currentLabelType == LabelType::BMFONT){
-        this->setBMFontSizeInternal(this->getBMFontSize() - 1);
+        this->setBMFontSizeInternal(fontSize);
     }
     
     _contentDirty = true;
@@ -1897,11 +1912,11 @@ void Label::setOverflow(Overflow overflow)
         return;
     }
 
-    _overflow = overflow;
-    if(_overflow == Overflow::RESIZE){
+    if(overflow == Overflow::RESIZE){
         this->setDimensions(0, 0);
         this->enableWrap(false);
     }
+    _overflow = overflow;
 }
 
 Label::Overflow Label::getOverflow()const

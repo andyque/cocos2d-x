@@ -331,6 +331,225 @@ bool Label::multilineTextWrapByChar()
     return true;
 }
 
+bool Label::isVerticalClampByWord()
+{
+    int textLen = getStringLength();
+    int lineIndex = 0;
+    float nextWordX = 0.f;
+    float letterRight = 0.f;
+    
+    auto contentScaleFactor = CC_CONTENT_SCALE_FACTOR();
+    FontLetterDefinition letterDef;
+    Vec2 letterPosition;
+    
+    this->updateBMFontScale();
+    
+    for (int index = 0; index < textLen; )
+    {
+        auto character = _utf16Text[index];
+        if (character == '\n')
+        {
+            letterRight = 0.f;
+            lineIndex++;
+            nextWordX = 0.f;
+            index++;
+            continue;
+        }
+        
+        auto wordLen = getFirstWordLen(_utf16Text, index, textLen);
+        float wordRight = letterRight;
+        float nextLetterX = nextWordX;
+        bool newLine = false;
+        for (int tmp = 0; tmp < wordLen;++tmp)
+        {
+            int letterIndex = index + tmp;
+            character = _utf16Text[letterIndex];
+            if (character == '\r')
+            {
+                continue;
+            }
+            if (_fontAtlas->getLetterDefinitionForChar(character, letterDef) == false)
+            {
+                CCLOG("LabelTextFormatter error:can't find letter definition in font file for letter: %c", character);
+                continue;
+            }
+            
+            auto letterX = (nextLetterX + letterDef.offsetX * _bmfontScale) / contentScaleFactor;
+            if (_maxLineWidth > 0.f
+                && nextWordX > 0.f
+                && letterX + letterDef.width * _bmfontScale > _maxLineWidth)
+            {
+                letterRight = 0.f;
+                lineIndex++;
+                nextWordX = 0.f;
+                newLine = true;
+                break;
+            }
+            else
+            {
+                letterPosition.x = letterX;
+            }
+            if (_horizontalKernings && letterIndex < textLen - 1)
+                nextLetterX += _horizontalKernings[letterIndex + 1];
+            nextLetterX += letterDef.xAdvance * _bmfontScale + _additionalKerning;
+            
+            wordRight = letterPosition.x + letterDef.width * _bmfontScale;
+            
+        }
+        
+        if (newLine)
+        {
+            continue;
+        }
+        
+        nextWordX = nextLetterX;
+        letterRight = wordRight;
+        
+        index += wordLen;
+    }
+    
+    _numberOfLines = lineIndex + 1;
+    _textDesiredHeight = (_numberOfLines * _lineHeight * _bmfontScale) / contentScaleFactor;
+    if (_numberOfLines > 1)
+        _textDesiredHeight += (_numberOfLines - 1) * _lineSpacing;
+    
+    if (_textDesiredHeight > _labelHeight)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+
+}
+
+bool Label::isVerticalClampByChar()
+{
+    int textLen = getStringLength();
+    int lineIndex = 0;
+    float nextLetterX = 0.f;
+    float letterRight = 0.f;
+    
+    auto contentScaleFactor = CC_CONTENT_SCALE_FACTOR();
+    FontLetterDefinition letterDef;
+    Vec2 letterPosition;
+    
+    this->updateBMFontScale();
+
+    for (int index = 0; index < textLen; index++)
+    {
+        auto character = _utf16Text[index];
+        if (character == '\r')
+        {
+            continue;
+        }
+        if (character == '\n')
+        {
+            letterRight = 0.f;
+            lineIndex++;
+            nextLetterX = 0.f;
+            continue;
+        }
+        
+        if (_fontAtlas->getLetterDefinitionForChar(character, letterDef) == false)
+        {
+            recordPlaceholderInfo(index, character);
+            CCLOG("LabelTextFormatter error:can't find letter definition in font file for letter: %c", character);
+            continue;
+        }
+        
+        auto letterX = (nextLetterX + letterDef.offsetX * _bmfontScale) / contentScaleFactor;
+        if (_maxLineWidth > 0.f
+            && nextLetterX > 0.f
+            && letterX + letterDef.width * _bmfontScale > _maxLineWidth)
+        {
+            letterRight = 0.f;
+            lineIndex++;
+            nextLetterX = 0.f;
+            letterPosition.x = letterDef.offsetX * _bmfontScale / contentScaleFactor;
+        }
+        else
+        {
+            letterPosition.x = letterX;
+        }
+        
+        if (_horizontalKernings && index < textLen - 1)
+            nextLetterX += _horizontalKernings[index + 1];
+        nextLetterX += letterDef.xAdvance * _bmfontScale + _additionalKerning;
+        
+        letterRight = letterPosition.x + letterDef.width * _bmfontScale;
+    }
+    
+    _numberOfLines = lineIndex + 1;
+    _textDesiredHeight = (_numberOfLines * _lineHeight * _bmfontScale) / contentScaleFactor;
+    if (_numberOfLines > 1)
+        _textDesiredHeight += (_numberOfLines - 1) * _lineSpacing;
+    
+    if (_textDesiredHeight > _labelHeight)
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+bool Label::isHorizontalClamp()
+{
+    bool letterClamp = false;
+    for (int ctr = 0; ctr < _lengthOfString; ++ctr)
+    {
+        if (_lettersInfo[ctr].valid)
+        {
+            auto& letterDef = _fontAtlas->_letterDefinitions[_lettersInfo[ctr].utf16Char];
+            
+            auto px = _lettersInfo[ctr].positionX + letterDef.width/2;
+            if(_labelWidth > 0.f){
+                if (px > _contentSize.width) {
+                    letterClamp = true;
+                    break;
+                }
+            }
+        }
+    }
+    
+    return letterClamp;
+}
+
+void Label::shrinkLabelToContentSize()
+{
+    float fontSize = 0;
+    if (_currentLabelType == LabelType::BMFONT) {
+        fontSize = _bmFontSize;
+    }else if(_currentLabelType == LabelType::TTF){
+        fontSize = this->getTTFConfig().fontSize;
+    }
+    
+    int i = 0;
+    auto letterDefinition = _fontAtlas->_letterDefinitions;
+    while (isHorizontalClamp()) {
+        ++i;
+        float newFontSize = fontSize - i;
+        
+        float scale = newFontSize / fontSize;
+        _fontAtlas->scaleFontLetterDefinition(scale);
+        
+        if (_maxLineWidth > 0.f && !_lineBreakWithoutSpaces)
+        {
+            multilineTextWrapByWord();
+        }
+        else
+        {
+            multilineTextWrapByChar();
+        }
+        computeAlignmentOffset();
+    }
+    std::swap(_fontAtlas->_letterDefinitions, letterDefinition);
+    this->scaleFontSizeDown(fontSize - i);
+}
+
 void Label::recordLetterInfo(const cocos2d::Vec2& point, char16_t utf16Char, int letterIndex, int lineIndex)
 {
     if (static_cast<std::size_t>(letterIndex) >= _lettersInfo.size())

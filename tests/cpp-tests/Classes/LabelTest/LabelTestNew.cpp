@@ -2353,15 +2353,16 @@ LabelResizeTest::LabelResizeTest()
 
     this->updateDrawNodeSize(_label->getContentSize());
 
-    auto slider1 = (ui::Slider*)this->getChildByTag(1);
-    slider1->setTouchEnabled(false);
+    // auto slider1 = (ui::Slider*)this->getChildByTag(1);
+    // slider1->setVisible(false);
 
-    auto slider2 = (ui::Slider*)this->getChildByTag(2);
-    slider2->setTouchEnabled(false);
+    // auto slider2 = (ui::Slider*)this->getChildByTag(2);
+    // slider2->setVisible(false);
 
     auto checkBox = (ui::CheckBox*)this->getChildByName("toggleWrap");
     checkBox->setSelected(false);
-    checkBox->setTouchEnabled(false);
+    // checkBox->setTouchEnabled(false);
+    // checkBox->setVisible(false);
 
     auto stepper = (ControlStepper*)this->getChildByName("stepper");
     stepper->setValue(12);

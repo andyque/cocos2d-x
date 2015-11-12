@@ -114,6 +114,8 @@ protected:
     void findNewCharacters(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);
 
     void conversionU16TOGB2312(const std::u16string& u16Text, std::unordered_map<unsigned short, unsigned short>& charCodeMap);
+    
+    void scaleFontLetterDefinition(float scaleFactor);
 
     std::unordered_map<ssize_t, Texture2D*> _atlasTextures;
     std::unordered_map<char16_t, FontLetterDefinition> _letterDefinitions;
