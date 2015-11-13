@@ -529,10 +529,11 @@ void Label::shrinkLabelToContentSize()
     
     int i = 0;
     auto letterDefinition = _fontAtlas->_letterDefinitions;
+    bool flag = true;
     while (isHorizontalClamp()) {
         ++i;
         float newFontSize = fontSize - i;
-        
+        flag = false;
         float scale = newFontSize / fontSize;
         _fontAtlas->scaleFontLetterDefinition(scale);
         
@@ -547,7 +548,9 @@ void Label::shrinkLabelToContentSize()
         computeAlignmentOffset();
     }
     std::swap(_fontAtlas->_letterDefinitions, letterDefinition);
-    this->scaleFontSizeDown(fontSize - i);
+    if (!flag) {
+        this->scaleFontSizeDown(fontSize - i);
+    }
 }
 
 void Label::recordLetterInfo(const cocos2d::Vec2& point, char16_t utf16Char, int letterIndex, int lineIndex)

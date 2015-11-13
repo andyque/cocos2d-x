@@ -777,7 +777,6 @@ bool Label::alignText()
         
         if(!updateQuads()){
             ret = false;
-    
             break;
         }
     
@@ -785,6 +784,7 @@ bool Label::alignText()
         
         updateColor();
     }while (0);
+
     return ret;
 }
 
@@ -848,7 +848,6 @@ bool Label::updateQuads()
                             _reusedRect.size.width = 0;
                         }else if(_overflow == Overflow::SHRINK){
                             letterClamp = true;
-                            this->shrinkLabelToContentSize();
                             ret = false;
                             break;
                         }
@@ -934,7 +933,7 @@ void Label::scaleFontSizeDown(float fontSize)
         this->setBMFontSizeInternal(fontSize);
     }
     
-    _contentDirty = true;
+    this->updateContent();
 }
 
 void Label::enableGlow(const Color4B& glowColor)
@@ -1424,6 +1423,9 @@ void Label::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t pare
     
     if (_systemFontDirty || _contentDirty)
     {
+        if(_overflow == Overflow::SHRINK){
+            this->shrinkLabelToContentSize();
+        }
         updateContent();
     }
     
