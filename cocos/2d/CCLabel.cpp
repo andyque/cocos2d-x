@@ -876,6 +876,9 @@ bool Label::updateQuads()
             }
         }     
     }
+    if(letterClamp){
+        this->shrinkLabelToContentSize();
+    }
     
 
     return ret;
@@ -919,7 +922,6 @@ void Label::setBMFontSizeInternal(float fontSize)
         this->setBMFontFilePath(_bmFontPath, Vec2::ZERO, fontSize);
         _contentDirty = true;
     }
-    _bmFontSize = fontSize;
 }
 
 void Label::scaleFontSizeDown(float fontSize)
@@ -1423,9 +1425,6 @@ void Label::visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t pare
     
     if (_systemFontDirty || _contentDirty)
     {
-        if(_overflow == Overflow::SHRINK){
-            this->shrinkLabelToContentSize();
-        }
         updateContent();
     }
     

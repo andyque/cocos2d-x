@@ -529,12 +529,14 @@ void Label::shrinkLabelToContentSize()
     
     int i = 0;
     auto letterDefinition = _fontAtlas->_letterDefinitions;
+    auto tempLetterDefinition = letterDefinition;
     bool flag = true;
     while (isHorizontalClamp()) {
         ++i;
         float newFontSize = fontSize - i;
         flag = false;
         float scale = newFontSize / fontSize;
+        std::swap(_fontAtlas->_letterDefinitions, tempLetterDefinition);
         _fontAtlas->scaleFontLetterDefinition(scale);
         
         if (_maxLineWidth > 0.f && !_lineBreakWithoutSpaces)
@@ -546,8 +548,10 @@ void Label::shrinkLabelToContentSize()
             multilineTextWrapByChar();
         }
         computeAlignmentOffset();
+        tempLetterDefinition = letterDefinition;
     }
     std::swap(_fontAtlas->_letterDefinitions, letterDefinition);
+
     if (!flag) {
         this->scaleFontSizeDown(fontSize - i);
     }
