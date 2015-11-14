@@ -519,10 +519,9 @@ protected:
 
     bool multilineTextWrapByChar();
     bool multilineTextWrapByWord();
-    void shrinkLabelToContentSize();
+    void shrinkLabelToContentSize(std::function<bool(void)> lambda);
     bool isHorizontalClamp();
-    bool isVerticalClampByChar();
-    bool isVerticalClampByWord();
+    bool isVerticalClamp();
 
     void updateLabelLetters();
     virtual bool alignText();

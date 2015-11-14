@@ -331,168 +331,15 @@ bool Label::multilineTextWrapByChar()
     return true;
 }
 
-bool Label::isVerticalClampByWord()
+bool Label::isVerticalClamp()
 {
-    int textLen = getStringLength();
-    int lineIndex = 0;
-    float nextWordX = 0.f;
-    float letterRight = 0.f;
-    
-    auto contentScaleFactor = CC_CONTENT_SCALE_FACTOR();
-    FontLetterDefinition letterDef;
-    Vec2 letterPosition;
-    
-    this->updateBMFontScale();
-    
-    for (int index = 0; index < textLen; )
-    {
-        auto character = _utf16Text[index];
-        if (character == '\n')
-        {
-            letterRight = 0.f;
-            lineIndex++;
-            nextWordX = 0.f;
-            index++;
-            continue;
-        }
-        
-        auto wordLen = getFirstWordLen(_utf16Text, index, textLen);
-        float wordRight = letterRight;
-        float nextLetterX = nextWordX;
-        bool newLine = false;
-        for (int tmp = 0; tmp < wordLen;++tmp)
-        {
-            int letterIndex = index + tmp;
-            character = _utf16Text[letterIndex];
-            if (character == '\r')
-            {
-                continue;
-            }
-            if (_fontAtlas->getLetterDefinitionForChar(character, letterDef) == false)
-            {
-                CCLOG("LabelTextFormatter error:can't find letter definition in font file for letter: %c", character);
-                continue;
-            }
-            
-            auto letterX = (nextLetterX + letterDef.offsetX * _bmfontScale) / contentScaleFactor;
-            if (_maxLineWidth > 0.f
-                && nextWordX > 0.f
-                && letterX + letterDef.width * _bmfontScale > _maxLineWidth)
-            {
-                letterRight = 0.f;
-                lineIndex++;
-                nextWordX = 0.f;
-                newLine = true;
-                break;
-            }
-            else
-            {
-                letterPosition.x = letterX;
-            }
-            if (_horizontalKernings && letterIndex < textLen - 1)
-                nextLetterX += _horizontalKernings[letterIndex + 1];
-            nextLetterX += letterDef.xAdvance * _bmfontScale + _additionalKerning;
-            
-            wordRight = letterPosition.x + letterDef.width * _bmfontScale;
-            
-        }
-        
-        if (newLine)
-        {
-            continue;
-        }
-        
-        nextWordX = nextLetterX;
-        letterRight = wordRight;
-        
-        index += wordLen;
-    }
-    
-    _numberOfLines = lineIndex + 1;
-    _textDesiredHeight = (_numberOfLines * _lineHeight * _bmfontScale) / contentScaleFactor;
-    if (_numberOfLines > 1)
-        _textDesiredHeight += (_numberOfLines - 1) * _lineSpacing;
-    
-    if (_textDesiredHeight > _labelHeight)
-    {
-        return false;
-    }
-    else
+    if (_textDesiredHeight > _contentSize.height)
     {
         return true;
     }
-
-}
-
-bool Label::isVerticalClampByChar()
-{
-    int textLen = getStringLength();
-    int lineIndex = 0;
-    float nextLetterX = 0.f;
-    float letterRight = 0.f;
-    
-    auto contentScaleFactor = CC_CONTENT_SCALE_FACTOR();
-    FontLetterDefinition letterDef;
-    Vec2 letterPosition;
-    
-    this->updateBMFontScale();
-
-    for (int index = 0; index < textLen; index++)
-    {
-        auto character = _utf16Text[index];
-        if (character == '\r')
-        {
-            continue;
-        }
-        if (character == '\n')
-        {
-            letterRight = 0.f;
-            lineIndex++;
-            nextLetterX = 0.f;
-            continue;
-        }
-        
-        if (_fontAtlas->getLetterDefinitionForChar(character, letterDef) == false)
-        {
-            recordPlaceholderInfo(index, character);
-            CCLOG("LabelTextFormatter error:can't find letter definition in font file for letter: %c", character);
-            continue;
-        }
-        
-        auto letterX = (nextLetterX + letterDef.offsetX * _bmfontScale) / contentScaleFactor;
-        if (_maxLineWidth > 0.f
-            && nextLetterX > 0.f
-            && letterX + letterDef.width * _bmfontScale > _maxLineWidth)
-        {
-            letterRight = 0.f;
-            lineIndex++;
-            nextLetterX = 0.f;
-            letterPosition.x = letterDef.offsetX * _bmfontScale / contentScaleFactor;
-        }
-        else
-        {
-            letterPosition.x = letterX;
-        }
-        
-        if (_horizontalKernings && index < textLen - 1)
-            nextLetterX += _horizontalKernings[index + 1];
-        nextLetterX += letterDef.xAdvance * _bmfontScale + _additionalKerning;
-        
-        letterRight = letterPosition.x + letterDef.width * _bmfontScale;
-    }
-    
-    _numberOfLines = lineIndex + 1;
-    _textDesiredHeight = (_numberOfLines * _lineHeight * _bmfontScale) / contentScaleFactor;
-    if (_numberOfLines > 1)
-        _textDesiredHeight += (_numberOfLines - 1) * _lineSpacing;
-    
-    if (_textDesiredHeight > _labelHeight)
-    {
-        return false;
-    }
     else
     {
-        return true;
+        return false;
     }
 }
 
@@ -518,7 +365,7 @@ bool Label::isHorizontalClamp()
     return letterClamp;
 }
 
-void Label::shrinkLabelToContentSize()
+void Label::shrinkLabelToContentSize(std::function<bool(void)> lambda)
 {
     float fontSize = 0;
     if (_currentLabelType == LabelType::BMFONT) {
@@ -530,15 +377,19 @@ void Label::shrinkLabelToContentSize()
     int i = 0;
     auto letterDefinition = _fontAtlas->_letterDefinitions;
     auto tempLetterDefinition = letterDefinition;
+    float originalLineHeight = this->getLineHeight();
     bool flag = true;
-    while (isHorizontalClamp()) {
+    while (lambda()) {
         ++i;
         float newFontSize = fontSize - i;
         flag = false;
+        if (newFontSize <= 0) {
+            break;
+        }
         float scale = newFontSize / fontSize;
         std::swap(_fontAtlas->_letterDefinitions, tempLetterDefinition);
         _fontAtlas->scaleFontLetterDefinition(scale);
-        
+        this->setLineHeight(originalLineHeight * scale);
         if (_maxLineWidth > 0.f && !_lineBreakWithoutSpaces)
         {
             multilineTextWrapByWord();
@@ -550,10 +401,13 @@ void Label::shrinkLabelToContentSize()
         computeAlignmentOffset();
         tempLetterDefinition = letterDefinition;
     }
+    this->setLineHeight(originalLineHeight);
     std::swap(_fontAtlas->_letterDefinitions, letterDefinition);
 
     if (!flag) {
-        this->scaleFontSizeDown(fontSize - i);
+        if (fontSize - i >= 0) {
+            this->scaleFontSizeDown(fontSize - i);
+        }
     }
 }
 

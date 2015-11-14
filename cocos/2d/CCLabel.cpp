@@ -774,9 +774,25 @@ bool Label::alignText()
             multilineTextWrapByChar();
         }
         computeAlignmentOffset();
-        
+
+        if(_enableWrap && _overflow == Overflow::SHRINK){
+            float fontSize = 0;
+            if (_currentLabelType == LabelType::BMFONT) {
+                fontSize = _bmFontSize;
+            }else if(_currentLabelType == LabelType::TTF){
+                fontSize = this->getTTFConfig().fontSize;
+            }
+
+            if(fontSize > 0 &&  isVerticalClamp()){
+                this->shrinkLabelToContentSize(CC_CALLBACK_0(Label::isVerticalClamp, this));
+            }
+        }
+
         if(!updateQuads()){
             ret = false;
+            if(!_enableWrap && _overflow == Overflow::SHRINK){
+                this->shrinkLabelToContentSize(CC_CALLBACK_0(Label::isHorizontalClamp, this));
+            }
             break;
         }
     
@@ -846,7 +862,9 @@ bool Label::updateQuads()
                     if (px > _contentSize.width) {
                         if(_overflow == Overflow::CLAMP){
                             _reusedRect.size.width = 0;
-                        }else if(_overflow == Overflow::SHRINK){
+                        }else if(_overflow == Overflow::SHRINK
+                                 && letterDef.width > 0
+                                 && _contentSize.width > letterDef.width){
                             letterClamp = true;
                             ret = false;
                             break;
@@ -876,10 +894,7 @@ bool Label::updateQuads()
             }
         }     
     }
-    if(letterClamp){
-        this->shrinkLabelToContentSize();
-    }
-    
+
 
     return ret;
 }
@@ -926,16 +941,22 @@ void Label::setBMFontSizeInternal(float fontSize)
 
 void Label::scaleFontSizeDown(float fontSize)
 {
-    
+    bool shouldUpdateContent = true;
     if(_currentLabelType == LabelType::TTF){
         auto ttfConfig = this->getTTFConfig();
         ttfConfig.fontSize = fontSize;
         this->setTTFConfigInternal(ttfConfig);
     }else if(_currentLabelType == LabelType::BMFONT){
+        if (fabs(fontSize) < FLT_EPSILON) {
+            fontSize = 0.1f;
+            shouldUpdateContent = false;
+        }
         this->setBMFontSizeInternal(fontSize);
     }
     
-    this->updateContent();
+    if (shouldUpdateContent) {
+        this->updateContent();
+    }
 }
 
 void Label::enableGlow(const Color4B& glowColor)

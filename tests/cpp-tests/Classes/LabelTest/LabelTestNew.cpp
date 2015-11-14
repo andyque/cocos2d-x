@@ -92,6 +92,7 @@ NewLabelTests::NewLabelTests()
     ADD_TEST_CASE(LabelWrapByWordTest);
     ADD_TEST_CASE(LabelWrapByCharTest);
     ADD_TEST_CASE(LabelShrinkByWordTest);
+    ADD_TEST_CASE(LabelShrinkByCharTest);
     ADD_TEST_CASE(LabelResizeTest);
 };
 
@@ -2342,6 +2343,25 @@ std::string LabelShrinkByWordTest::subtitle() const
     return "";
 }
 
+LabelShrinkByCharTest::LabelShrinkByCharTest()
+{
+    _label->setLineSpacing(5);
+    _label->setAdditionalKerning(2);
+    _label->setLineBreakWithoutSpace(true);
+    _label->setString("This is  Hello World  hehe I love 一二三");
+    _label->setVerticalAlignment(TextVAlignment::CENTER);
+    _label->setOverflow(Label::Overflow::SHRINK);
+}
+
+std::string LabelShrinkByCharTest::title() const
+{
+    return "Shrink content Test: Char Wrap";
+}
+
+std::string LabelShrinkByCharTest::subtitle() const
+{
+    return "";
+}
 LabelResizeTest::LabelResizeTest()
 {
     _label->setLineSpacing(5);
