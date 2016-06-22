@@ -178,6 +178,18 @@ void EditBoxImplAndroid::setNativeVisible(bool visible)
     JniHelper::callStaticVoidMethod(editBoxClassName, "setVisible", _editBoxIndex, visible);
 }
 
+void EditBoxImplAndroid::setNativePadding(float left, float top, float right, float bottom)
+{
+    
+    setEditBoxPaddingJNI(_editBoxIndex, left, top, right, bottom);
+}
+
+void EditBoxImplAndroid::setNativeTextAlignment(TextHAlignment hAlign, TextVAlignment vAlign)
+{
+    
+    setEditBoxTextAlignmentJNI(_editBoxIndex, (int)hAlign, (int)vAlign);
+}
+    
 void EditBoxImplAndroid::updateNativeFrame(const Rect& rect)
 {
     JniHelper::callStaticVoidMethod(editBoxClassName, "setEditBoxViewRect", _editBoxIndex, 

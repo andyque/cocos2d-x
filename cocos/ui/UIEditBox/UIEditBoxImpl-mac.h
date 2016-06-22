@@ -71,7 +71,8 @@ public:
     virtual void nativeOpenKeyboard() override;
     virtual void nativeCloseKeyboard() override;
     virtual void setNativeMaxLength(int maxLength) override;
-
+    virtual void setNativePadding(float left, float top, float right, float bottom) override{};
+    virtual void setNativeTextAlignment(TextHAlignment hAlign, TextVAlignment vAlign) override{};
 private:
     NSFont*    constructFont(const char* fontName, int fontSize);
     
