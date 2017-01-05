@@ -91,6 +91,7 @@ bool UIEditBoxTest::init()
         _editPassword->setInputFlag(ui::EditBox::InputFlag::PASSWORD);
         _editPassword->setInputMode(ui::EditBox::InputMode::SINGLE_LINE);
         _editPassword->setFontSize(editBoxSize.height/2);
+        _editPassword->setPlaceholderFontColor(Color3B::BLUE);
         _editPassword->setDelegate(this);
         _editPassword->setVisible(true);
         addChild(_editPassword);

@@ -142,7 +142,16 @@
 
 - (void)setPlaceholderTextColor:(UIColor *)color
 {
-    self.textInput.ccui_placeholderLabel.textColor = color;
+    if ([self.textInput isKindOfClass:[UITextView class]]) {
+        self.textInput.ccui_placeholderLabel.textColor = color;
+    } else {
+        if ([self.textInput respondsToSelector:@selector(setAttributedPlaceholder:)]) {
+            id attributedString = [[NSAttributedString alloc] initWithString:self.textInput.ccui_placeholder attributes:@{NSForegroundColorAttributeName: color}];
+            [self.textInput performSelector:@selector(setAttributedPlaceholder:) withObject:attributedString];
+        } else {
+            NSLog(@"Cannot set placeholder text's color, because deployment target is earlier than iOS 6.0");
+        }
+    }
 }
 
 - (void)setInputMode:(cocos2d::ui::EditBox::InputMode)inputMode
