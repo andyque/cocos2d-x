@@ -29,6 +29,7 @@ THE SOFTWARE.
 
 NS_CC_BEGIN
 
+// This is a test comment
 CC_DLL const char* cocos2dVersion()
 {
     return "cocos2d-x 4.0alpha1";
