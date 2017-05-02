@@ -19,7 +19,7 @@ node_name = os.environ['NODE_NAME']
 
 def download_3rd_libs(branch):
     #run download-deps.py
-    print("prepare to downloading ...")
+    print("prepare to downloading 3rd party libraries ...")
     os.system('python download-deps.py -r no')
 
 def lint_include_of_cocos_headers():
