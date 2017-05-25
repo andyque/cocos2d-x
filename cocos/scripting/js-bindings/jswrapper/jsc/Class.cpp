@@ -146,7 +146,7 @@ namespace se {
             args.clear();
             JSObjectRef getter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.getter);
             JSObjectRef setter = JSObjectMakeFunctionWithCallback(__cx, nullptr, property.setter);
-
+            
             args.push_back(Value(prototypeObject));
             args.push_back(Value(property.name));
             args.push_back(Value(Object::_createJSObject(nullptr, getter, false)));

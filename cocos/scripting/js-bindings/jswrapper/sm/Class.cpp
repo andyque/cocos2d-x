@@ -158,7 +158,7 @@ namespace se {
         _properties.push_back(JS_PS_END);
         _staticFuncs.push_back(JS_FS_END);
         _staticProperties.push_back(JS_PS_END);
-
+        
         JS::RootedObject jsobj(__cx,
                                JS_InitClass(__cx, parent, parentProto, &_jsCls,
                                             _ctor, 0,

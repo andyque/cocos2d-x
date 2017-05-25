@@ -441,16 +441,7 @@
 		1AC004F61EBC480D004B3660 /* v8-version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "v8-version.h"; sourceTree = "<group>"; };
 		1AC004F71EBC480D004B3660 /* v8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = v8.h; sourceTree = "<group>"; };
 		1AC004F81EBC480D004B3660 /* v8config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = v8config.h; sourceTree = "<group>"; };
-		1AC004FB1EBC480D004B3660 /* libfuzzer_support.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfuzzer_support.a; sourceTree = "<group>"; };
-		1AC004FC1EBC480D004B3660 /* libgmock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgmock.a; sourceTree = "<group>"; };
-		1AC004FD1EBC480D004B3660 /* libgtest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libgtest.a; sourceTree = "<group>"; };
-		1AC004FE1EBC480D004B3660 /* libicui18n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libicui18n.a; sourceTree = "<group>"; };
-		1AC004FF1EBC480D004B3660 /* libicuuc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libicuuc.a; sourceTree = "<group>"; };
-		1AC005001EBC480D004B3660 /* libjson_fuzzer_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libjson_fuzzer_lib.a; sourceTree = "<group>"; };
-		1AC005011EBC480D004B3660 /* libparser_fuzzer_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libparser_fuzzer_lib.a; sourceTree = "<group>"; };
-		1AC005021EBC480D004B3660 /* libregexp_fuzzer_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libregexp_fuzzer_lib.a; sourceTree = "<group>"; };
 		1AC005031EBC480D004B3660 /* libv8_base.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libv8_base.a; sourceTree = "<group>"; };
-		1AC005041EBC480D004B3660 /* libv8_external_snapshot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libv8_external_snapshot.a; sourceTree = "<group>"; };
 		1AC005051EBC480D004B3660 /* libv8_libbase.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libv8_libbase.a; sourceTree = "<group>"; };
 		1AC005061EBC480D004B3660 /* libv8_libplatform.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libv8_libplatform.a; sourceTree = "<group>"; };
 		1AC005071EBC480D004B3660 /* libv8_libsampler.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libv8_libsampler.a; sourceTree = "<group>"; };
@@ -909,16 +900,7 @@
 		1AC004FA1EBC480D004B3660 /* mac */ = {
 			isa = PBXGroup;
 			children = (
-				1AC004FB1EBC480D004B3660 /* libfuzzer_support.a */,
-				1AC004FC1EBC480D004B3660 /* libgmock.a */,
-				1AC004FD1EBC480D004B3660 /* libgtest.a */,
-				1AC004FE1EBC480D004B3660 /* libicui18n.a */,
-				1AC004FF1EBC480D004B3660 /* libicuuc.a */,
-				1AC005001EBC480D004B3660 /* libjson_fuzzer_lib.a */,
-				1AC005011EBC480D004B3660 /* libparser_fuzzer_lib.a */,
-				1AC005021EBC480D004B3660 /* libregexp_fuzzer_lib.a */,
 				1AC005031EBC480D004B3660 /* libv8_base.a */,
-				1AC005041EBC480D004B3660 /* libv8_external_snapshot.a */,
 				1AC005051EBC480D004B3660 /* libv8_libbase.a */,
 				1AC005061EBC480D004B3660 /* libv8_libplatform.a */,
 				1AC005071EBC480D004B3660 /* libv8_libsampler.a */,

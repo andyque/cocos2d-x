@@ -368,7 +368,7 @@ int main_register_class(int argc, char** argv)
 
     jsb_register_all();
 
-    se->executeScriptFile("/Users/james/Project/cocos2d-x/tests/js-tests/src/test-new-jsb.js");
+    se->executeScriptFile("/Users/guanghui/cocos2d-x/tests/js-tests/src/test-new-jsb.js");
 
 //    delete global;
 

@@ -224,14 +224,8 @@
 		1A0EE43318CDF799004CD58F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCA39E18CD9EE50087CE3A /* UIKit.framework */; };
 		1A0EE43418CDF799004CD58F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABCA39C18CD9ED80087CE3A /* AVFoundation.framework */; };
 		1A0EE43518CDF799004CD58F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C64832165F3AFD007D4F18 /* Foundation.framework */; };
-		1A55434A1EC0A40500AEA55E /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5543491EC0A40500AEA55E /* libv8_base.a */; };
-		1A55434B1EC0A46900AEA55E /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5C79061EC079E00045BEC5 /* libv8_libplatform.a */; };
-		1A55434D1EC0A4FE00AEA55E /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A55434C1EC0A4FE00AEA55E /* libv8_libsampler.a */; };
-		1A55434F1EC0A50200AEA55E /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A55434E1EC0A50200AEA55E /* libv8_nosnapshot.a */; };
-		1A5543501EC0A51500AEA55E /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5C79051EC079E00045BEC5 /* libv8_libbase.a */; };
 		1A55439C1EC1B02F00AEA55E /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A55439B1EC1B02F00AEA55E /* JavaScriptCore.framework */; };
 		1A5543C21EC2C7BE00AEA55E /* registerclass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9E998A1EB1C92A001AEA19 /* registerclass.cpp */; };
-		1A6984F01EC31A1E00DE485F /* libChakraCoreStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A6984EF1EC31A1E00DE485F /* libChakraCoreStatic.a */; };
 		1A6984F11EC31A6F00DE485F /* libicui18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADB8B271EC2FDD1007B7FA3 /* libicui18n.a */; };
 		1A6984F21EC31A6F00DE485F /* libicuuc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ADB8B291EC2FDE7007B7FA3 /* libicuuc.a */; };
 		1A78A5521D1A3C9B00B61B27 /* ccs-res in Resources */ = {isa = PBXBuildFile; fileRef = 460629771CDB4DBA00B44058 /* ccs-res */; };
@@ -689,6 +683,12 @@
 		294D7D911D0E50BF002CE7B7 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DC5A1E1CFFE5E700CF2930 /* CoreText.framework */; };
 		295824591987415900F9746D /* UIScale9SpriteTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295824571987415900F9746D /* UIScale9SpriteTest.cpp */; };
 		2958245A1987415900F9746D /* UIScale9SpriteTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 295824571987415900F9746D /* UIScale9SpriteTest.cpp */; };
+		298BC8CE1ECBF111001081B0 /* libv8_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A18538E1EC0257100EF28DC /* libv8_base.a */; };
+		298BC8CF1ECBF111001081B0 /* libv8_libbase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853901EC0257100EF28DC /* libv8_libbase.a */; };
+		298BC8D01ECBF111001081B0 /* libv8_libplatform.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853911EC0257100EF28DC /* libv8_libplatform.a */; };
+		298BC8D11ECBF111001081B0 /* libv8_libsampler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853921EC0257100EF28DC /* libv8_libsampler.a */; };
+		298BC8D21ECBF111001081B0 /* libv8_nosnapshot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A1853931EC0257100EF28DC /* libv8_nosnapshot.a */; };
+		298BC8D41ECBF118001081B0 /* libChakraCoreStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 298BC8D31ECBF118001081B0 /* libChakraCoreStatic.a */; };
 		298D7F6F19AC31F300FF096D /* UIWebViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 298D7F6D19AC31F300FF096D /* UIWebViewTest.cpp */; };
 		29AFEF6719ACCAA000F6B10A /* Test.html in Resources */ = {isa = PBXBuildFile; fileRef = 29AFEF6619ACCAA000F6B10A /* Test.html */; };
 		29DC5A201CFFE6E100CF2930 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29DC5A1E1CFFE5E700CF2930 /* CoreText.framework */; };
@@ -2352,6 +2352,9 @@
 		292CF01319A1965E00E8E6A0 /* UIEditBoxTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEditBoxTest.h; sourceTree = "<group>"; };
 		295824571987415900F9746D /* UIScale9SpriteTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIScale9SpriteTest.cpp; sourceTree = "<group>"; };
 		295824581987415900F9746D /* UIScale9SpriteTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScale9SpriteTest.h; sourceTree = "<group>"; };
+		298BC8CA1ECBF109001081B0 /* libjs_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjs_static.a; path = ../external/spidermonkey/prebuilt/mac/libjs_static.a; sourceTree = "<group>"; };
+		298BC8CB1ECBF109001081B0 /* libmozglue.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmozglue.a; path = ../external/spidermonkey/prebuilt/mac/libmozglue.a; sourceTree = "<group>"; };
+		298BC8D31ECBF118001081B0 /* libChakraCoreStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libChakraCoreStatic.a; path = ../external/chakracore/prebuilt/mac/libChakraCoreStatic.a; sourceTree = "<group>"; };
 		298D7F6D19AC31F300FF096D /* UIWebViewTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UIWebViewTest.cpp; path = UIWebViewTest/UIWebViewTest.cpp; sourceTree = "<group>"; };
 		298D7F6E19AC31F300FF096D /* UIWebViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIWebViewTest.h; path = UIWebViewTest/UIWebViewTest.h; sourceTree = "<group>"; };
 		29AFEF6619ACCAA000F6B10A /* Test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Test.html; path = "../tests/cpp-tests/Resources/Test.html"; sourceTree = "<group>"; };
@@ -2640,15 +2643,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A6984F01EC31A1E00DE485F /* libChakraCoreStatic.a in Frameworks */,
+				298BC8D41ECBF118001081B0 /* libChakraCoreStatic.a in Frameworks */,
 				1A6984F21EC31A6F00DE485F /* libicuuc.a in Frameworks */,
 				1A6984F11EC31A6F00DE485F /* libicui18n.a in Frameworks */,
 				1A55439C1EC1B02F00AEA55E /* JavaScriptCore.framework in Frameworks */,
-				1A55434A1EC0A40500AEA55E /* libv8_base.a in Frameworks */,
-				1A5543501EC0A51500AEA55E /* libv8_libbase.a in Frameworks */,
-				1A55434B1EC0A46900AEA55E /* libv8_libplatform.a in Frameworks */,
-				1A55434D1EC0A4FE00AEA55E /* libv8_libsampler.a in Frameworks */,
-				1A55434F1EC0A50200AEA55E /* libv8_nosnapshot.a in Frameworks */,
+				298BC8CE1ECBF111001081B0 /* libv8_base.a in Frameworks */,
+				298BC8CF1ECBF111001081B0 /* libv8_libbase.a in Frameworks */,
+				298BC8D01ECBF111001081B0 /* libv8_libplatform.a in Frameworks */,
+				298BC8D11ECBF111001081B0 /* libv8_libsampler.a in Frameworks */,
+				298BC8D21ECBF111001081B0 /* libv8_nosnapshot.a in Frameworks */,
 				185663581B4155D3009EF2AE /* Security.framework in Frameworks */,
 				185664951B4246C9009EF2AE /* libsqlite3.dylib in Frameworks */,
 				185664941B4246BA009EF2AE /* AppKit.framework in Frameworks */,
@@ -4597,6 +4600,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				298BC8D31ECBF118001081B0 /* libChakraCoreStatic.a */,
+				298BC8CA1ECBF109001081B0 /* libjs_static.a */,
+				298BC8CB1ECBF109001081B0 /* libmozglue.a */,
 				1A6984EF1EC31A1E00DE485F /* libChakraCoreStatic.a */,
 				1ADB8B2B1EC30316007B7FA3 /* libChakraCore.dylib */,
 				1ADB8B291EC2FDE7007B7FA3 /* libicuuc.a */,
@@ -7685,9 +7691,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/js-tests/project/proj.mac/Test_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					/Users/james/Project/v8/out.gn/foo/obj,
-					/Users/james/Project/ChakraCore/out/Debug/lib,
 					/usr/local/Cellar/icu4c/58.2/lib,
+					"$(SRCROOT)/../external/chakracore/prebuilt/mac",
+					"$(SRCROOT)/../external/v8/prebuilt/mac",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
@@ -7722,9 +7728,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/../tests/js-tests/project/proj.mac/Test_Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
-					/Users/james/Project/v8/out.gn/foo/obj,
-					/Users/james/Project/ChakraCore/out/Debug/lib,
 					/usr/local/Cellar/icu4c/58.2/lib,
+					"$(SRCROOT)/../external/chakracore/prebuilt/mac",
+					"$(SRCROOT)/../external/v8/prebuilt/mac",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_LDFLAGS = (
