@@ -10,6 +10,7 @@ namespace se {
         State();
         ~State();
         State(void* nativeThisObject);
+        State(Object* thisObject, const ValueArray& args);
         State(void* nativeThisObject,
               const ValueArray& args,
               uint16_t argc);

@@ -30,21 +30,22 @@ void Node_finalized(se::State& state)
 
 SE_FINALIZE_FUNC(Node_finalized)
 
-bool Node_constructor(se::Object* thisObject, const se::ValueArray& args)
+bool Node_constructor(se::State& state)
 {
     printf("Node_constructor ...\n");
     Node* obj = new Node();
-    thisObject->setPrivateData(obj);
+    state.thisObject()->setPrivateData(obj);
     return true;
 }
 
 SE_CTOR(Node_constructor, __jsb_Node_class, _SE(Node_finalized))
 
-void Node_ctor(se::Object* thisObject, const se::ValueArray& args)
+bool Node_ctor(se::State& state)
 {
     printf("Node_ctor ...\n");
     Node* obj = new Node();
-    thisObject->setPrivateData(obj);
+    state.thisObject()->setPrivateData(obj);
+    return true;
 }
 SE_CTOR(Node_ctor, __jsb_Node_class, _SE(Node_finalized))
 
@@ -321,40 +322,44 @@ bool Node_unschedule(se::State& state)
 
 SE_FUNCTION(Node_unschedule);
 
-void Node_set_x(se::Object* thisObject, void* nativeThisObject, const se::Value& data)
+bool Node_set_x(se::State& state)
 {
-    Node* thiz = (Node*)nativeThisObject;
+    Node* thiz = (Node*)state.nativeThisObject();
     printf("cc.Node set_x native obj: %p\n", thiz);
-    float x = data.toNumber();
+    float x = state.rval().toNumber();
     thiz->setPositionX(x);
+    return true;
 }
 
-SE_SET_PROPERTY(Node_set_x, se::DONT_NEED_THIS)
+SE_SET_PROPERTY(Node_set_x)
 
-se::Value Node_get_x(se::Object* thisObject, void* nativeThisObject)
+bool Node_get_x(se::State& state)
 {
-    Node* thiz = (Node*)nativeThisObject;
-    return se::Value(thiz->getPositionX());
+    Node* thiz = (Node*)state.nativeThisObject();
+    state.setRetVal(se::Value(thiz->getPositionX()));
+    return true;
 }
 
-SE_GET_PROPERTY(Node_get_x, se::DONT_NEED_THIS)
+SE_GET_PROPERTY(Node_get_x)
 
-void Node_set_y(se::Object* thisObject, void* nativeThisObject, const se::Value& data)
+bool Node_set_y(se::State& state)
 {
-    Node* thiz = (Node*)nativeThisObject;
+    Node* thiz = (Node*)state.nativeThisObject();
     printf("cc.Node set_y native obj: %p\n", thiz);
-    float y = data.toNumber();
+    float y = state.rval().toNumber();
     thiz->setPositionY(y);
+    return true;
 }
-SE_SET_PROPERTY(Node_set_y, se::DONT_NEED_THIS)
+SE_SET_PROPERTY(Node_set_y)
 
-se::Value Node_get_y(se::Object* thisObject, void* nativeThisObject)
+bool Node_get_y(se::State& state)
 {
-     Node* thiz = (Node*)nativeThisObject;
-    return se::Value(thiz->getPositionY());
+    Node* thiz = (Node*)state.nativeThisObject();
+    state.setRetVal(se::Value(thiz->getPositionY()));
+    return true;
 }
 
-SE_GET_PROPERTY(Node_get_y, se::DONT_NEED_THIS)
+SE_GET_PROPERTY(Node_get_y)
 
 bool jsb_register_Node()
 {

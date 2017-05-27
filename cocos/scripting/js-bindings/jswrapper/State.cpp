@@ -21,7 +21,7 @@ namespace se {
     
     State::~State()
     {
-        
+        SAFE_RELEASE(this->_thisObject);
     }
     
     State::State(void* nativeThisObject)
@@ -42,6 +42,14 @@ namespace se {
         this->_thisObject = nullptr;
     }
     
+    State::State(Object* thisObject, const ValueArray& args)
+    :_thisObject(thisObject),
+    _args(&args)
+    {
+        this->_nativeThisObject = nullptr;
+        this->_argc = 0;
+    }
+    
     void* State::nativeThisObject() const
     {
         return this->_nativeThisObject;
@@ -52,9 +60,10 @@ namespace se {
     }
     Object* State::thisObject()
     {
-        if (nullptr == this->_thisObject) {
+        if (nullptr == this->_thisObject && nullptr != this->_nativeThisObject) {
             this->_thisObject = se::Object::getObjectWithPtr(this->_nativeThisObject);
         }
+        assert(this->_thisObject != nullptr);
         return this->_thisObject;
     }
     

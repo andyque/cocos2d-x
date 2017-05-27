@@ -33,7 +33,6 @@ SE_UNUSED bool ret = true;                                          \
 SE_UNUSED unsigned argc = (unsigned)_v8args.Length();               \
 se::ValueArray args;                                                \
 se::internal::jsToSeArgs(_v8args, &args);                           \
-se::Object* thisObject = nullptr;                                   \
 void* nativeThisObject = se::internal::getPrivate(_isolate, _v8args.This()); \
 se::State state(nativeThisObject, args, argc); \
 resigterFunc(state);                    \
@@ -46,7 +45,6 @@ if (v.isObject() && v.toObject()->isRooted())   \
 v.toObject()->switchToUnrooted();           \
 }                                               \
 }                                                   \
-SAFE_RELEASE(thisObject);                           \
 }
 
 
@@ -69,7 +67,8 @@ resigterFunc(state); \
         se::internal::jsToSeArgs(_v8args, &args);                       \
         se::Object* thisObject = se::Object::_createJSObject(clasPointer, _v8args.This(), false); \
         thisObject->_setFinalizeCallback(finalizeCb);                   \
-        resigterFunc(thisObject, args);                                  \
+        se::State state(thisObject, args); \
+        resigterFunc(state);                                  \
         se::Value _property;                                            \
         bool _found = false;                                            \
         _found = thisObject->getProperty("_ctor", &_property);          \
@@ -84,21 +83,17 @@ resigterFunc(state); \
     }
 
 
-#define SE_GET_PROPERTY(funcName, needThisObject) \
+#define SE_GET_PROPERTY(funcName) \
 void funcName##Registry(v8::Local<v8::String> _property, const v8::PropertyCallbackInfo<v8::Value>& _v8args) \
 { \
 v8::Isolate* _isolate = _v8args.GetIsolate(); \
 v8::HandleScope _hs(_isolate); \
 SE_UNUSED bool ret = true; \
-se::Object* thisObject = nullptr; \
 void* nativeThisObject = se::internal::getPrivate(_isolate, _v8args.This()); \
-if (nativeThisObject != nullptr && needThisObject) \
-{ \
-thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
-} \
-auto value = funcName(thisObject, nativeThisObject); \
-SE_SET_RVAL(value); \
-SAFE_RELEASE(thisObject); \
+se::State state(nativeThisObject); \
+funcName(state); \
+if (!state.rval().isUndefined()) \
+SE_SET_RVAL(state.rval()); \
 }
 
 // --- Get Property
@@ -107,22 +102,18 @@ SAFE_RELEASE(thisObject); \
     se::internal::setReturnValue(data, _v8args);
 
 // --- Set Property
-#define SE_SET_PROPERTY(funcName, needThisObject) \
+#define SE_SET_PROPERTY(funcName) \
 void funcName##Registry(v8::Local<v8::String> _property, v8::Local<v8::Value> _value, const v8::PropertyCallbackInfo<void>& _v8args) \
 { \
 v8::Isolate* _isolate = _v8args.GetIsolate(); \
 v8::HandleScope _hs(_isolate); \
 SE_UNUSED bool ret = true; \
-se::Object* thisObject = nullptr; \
 void* nativeThisObject = se::internal::getPrivate(_isolate, _v8args.This()); \
-if (nativeThisObject != nullptr && needThisObject) \
-{ \
-thisObject = se::Object::getObjectWithPtr(nativeThisObject); \
-} \
+se::State state(nativeThisObject); \
 se::Value data; \
 se::internal::jsToSeValue(_isolate, _value, &data); \
-funcName(thisObject, nativeThisObject, data); \
-SAFE_RELEASE(thisObject); \
+state.setRetVal(data); \
+funcName(state); \
 }
 
 
