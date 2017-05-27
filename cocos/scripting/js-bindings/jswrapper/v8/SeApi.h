@@ -5,4 +5,5 @@
 #include "Object.hpp"
 #include "../Value.hpp"
 #include "Utils.hpp"
+#include "../State.hpp"
 #include "HelperMacros.h"

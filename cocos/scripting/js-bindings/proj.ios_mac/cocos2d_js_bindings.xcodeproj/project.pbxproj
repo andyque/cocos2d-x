@@ -187,6 +187,8 @@
 		1ADB8B1C1EC2FB92007B7FA3 /* jsb_menu.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A37575A1EB96C2C000CA182 /* jsb_menu.hpp */; };
 		1ADB8B1D1EC2FB92007B7FA3 /* jsb_menuitem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A3757611EB96C56000CA182 /* jsb_menuitem.cpp */; };
 		1ADB8B1E1EC2FB92007B7FA3 /* jsb_menuitem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 1A3757621EB96C56000CA182 /* jsb_menuitem.hpp */; };
+		29866B2C1ED909E900DA8C63 /* State.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29866B2A1ED909E900DA8C63 /* State.cpp */; };
+		29866B2D1ED909E900DA8C63 /* State.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 29866B2B1ED909E900DA8C63 /* State.hpp */; };
 		4BE089EC1ADF967400D65D4B /* jsb_cocos2dx_experimental_webView_manual.h in Headers */ = {isa = PBXBuildFile; fileRef = 4BE089EA1ADF967400D65D4B /* jsb_cocos2dx_experimental_webView_manual.h */; };
 		507B42401C31DCC60067B53E /* ScriptingCore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A119E7C18BDF19200352BAA /* ScriptingCore.cpp */; };
 		507B42481C31DCC60067B53E /* ScriptingCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A119E7D18BDF19200352BAA /* ScriptingCore.h */; };
@@ -456,6 +458,8 @@
 		1AC0052D1EBC490F004B3660 /* SeApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeApi.h; sourceTree = "<group>"; };
 		1AC0052F1EBC4B5D004B3660 /* HelperMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelperMacros.h; sourceTree = "<group>"; };
 		1AC005311EBC5A2B004B3660 /* Object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Object.hpp; sourceTree = "<group>"; };
+		29866B2A1ED909E900DA8C63 /* State.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = State.cpp; sourceTree = "<group>"; };
+		29866B2B1ED909E900DA8C63 /* State.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = State.hpp; sourceTree = "<group>"; };
 		4BE089EA1ADF967400D65D4B /* jsb_cocos2dx_experimental_webView_manual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jsb_cocos2dx_experimental_webView_manual.h; sourceTree = "<group>"; };
 		507B427D1C31DCC60067B53E /* libjscocos2d tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libjscocos2d tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6037900B42714CFB526E5FE1 /* Assertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Assertions.h; sourceTree = "<group>"; };
@@ -818,6 +822,8 @@
 				1A9E99951EB1F3D6001AEA19 /* Ref.cpp */,
 				1A9E99961EB1F3D6001AEA19 /* Ref.hpp */,
 				1AC005311EBC5A2B004B3660 /* Object.hpp */,
+				29866B2A1ED909E900DA8C63 /* State.cpp */,
+				29866B2B1ED909E900DA8C63 /* State.hpp */,
 			);
 			name = jswrapper;
 			path = ../jswrapper;
@@ -1368,6 +1374,7 @@
 				1ADB8B141EC2FB92007B7FA3 /* jsb_node.hpp in Headers */,
 				6037947002E95BE244EE4EC2 /* UniquePtrExtensions.h in Headers */,
 				1ADB8B0E1EC2FA95007B7FA3 /* jsb_director.hpp in Headers */,
+				29866B2D1ED909E900DA8C63 /* State.hpp in Headers */,
 				1ADB8B101EC2FB92007B7FA3 /* ScriptingCore.h in Headers */,
 				60379A9BDE9AC1C9EA89BA5E /* OperatorNewExtensions.h in Headers */,
 				60379A1797109E57D1DBAD74 /* TaggedAnonymousMemory.h in Headers */,
@@ -1571,6 +1578,7 @@
 				1A55436C1EC1606800AEA55E /* Class.cpp in Sources */,
 				1A1853A31EC052FE00EF28DC /* ObjectWrap.cpp in Sources */,
 				1ADB8B171EC2FB92007B7FA3 /* jsb_global.cpp in Sources */,
+				29866B2C1ED909E900DA8C63 /* State.cpp in Sources */,
 				1AC005291EBC483F004B3660 /* Object.cpp in Sources */,
 				1AC005251EBC483F004B3660 /* ScriptEngine.cpp in Sources */,
 				1ADB8B1B1EC2FB92007B7FA3 /* jsb_menu.cpp in Sources */,
