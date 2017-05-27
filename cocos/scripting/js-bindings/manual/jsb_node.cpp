@@ -14,40 +14,15 @@
 
 using namespace cocos2d;
 
-se::Object* __jsb_Node_proto = nullptr;
-se::Class* __jsb_Node_class = nullptr;
-
-void Node_finalized(se::State& state)
-{
-    auto nativeThisObject = state.nativeThisObject();
-    if (nativeThisObject)
-    {
-        Node* thiz = (Node*) nativeThisObject;
-        printf("Node_finalized %p ...\n", thiz->getUserData());
-        SAFE_RELEASE(thiz);
-    }
-}
-
-SE_FINALIZE_FUNC(Node_finalized)
-
-bool Node_constructor(se::State& state)
-{
-    printf("Node_constructor ...\n");
-    Node* obj = new Node();
-    state.thisObject()->setPrivateData(obj);
-    return true;
-}
-
-SE_CTOR(Node_constructor, __jsb_Node_class, _SE(Node_finalized))
+SE_IMPLEMENT_MODULE(Node)
 
 bool Node_ctor(se::State& state)
 {
-    printf("Node_ctor ...\n");
+    printf("Node_ctor ...    \n");
     Node* obj = new Node();
     state.thisObject()->setPrivateData(obj);
     return true;
 }
-SE_CTOR(Node_ctor, __jsb_Node_class, _SE(Node_finalized))
 
 bool Node_create(se::State& state)
 {
@@ -56,11 +31,9 @@ bool Node_create(se::State& state)
     auto obj = se::Object::createObjectWithClass(__jsb_Node_class, false);
     obj->setPrivateData(node);
     state.setRetVal(se::Value(obj));
-    
+
     return true;
 }
-
-SE_FUNCTION(Node_create)
 
 bool Node_onEnter(se::State& state)
 {
@@ -70,8 +43,6 @@ bool Node_onEnter(se::State& state)
     return true;
 }
 
-SE_FUNCTION(Node_onEnter);
-
 bool Node_onExit(se::State& state)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
@@ -79,8 +50,6 @@ bool Node_onExit(se::State& state)
     thiz->onExit();
     return true;
 }
-
-SE_FUNCTION(Node_onExit);
 
 bool Node_onEnterTransitionDidFinish(se::State& state)
 {
@@ -90,8 +59,6 @@ bool Node_onEnterTransitionDidFinish(se::State& state)
     return true;
 }
 
-SE_FUNCTION(Node_onEnterTransitionDidFinish);
-
 bool Node_onExitTransitionDidStart(se::State& state)
 {
     ScriptingCore::getInstance()->setCalledFromScript(true);
@@ -99,9 +66,6 @@ bool Node_onExitTransitionDidStart(se::State& state)
     thiz->onExitTransitionDidStart();
     return true;
 }
-
-SE_FUNCTION(Node_onExitTransitionDidStart);
-
 
 bool Node_cleanup(se::State& state)
 {
@@ -111,8 +75,6 @@ bool Node_cleanup(se::State& state)
     return true;
 }
 
-SE_FUNCTION(Node_cleanup);
-
 bool Node_addChild(se::State& state)
 {
     Node* thiz = (Node*)state.nativeThisObject();
@@ -120,10 +82,6 @@ bool Node_addChild(se::State& state)
     thiz->addChild(child);
     return true;
 }
-
-SE_FUNCTION(Node_addChild);
-
-
 
 static std::unordered_map<se::Object*, std::unordered_map<se::Object*, std::string>> __jsthis_schedulekey_map;
 
@@ -293,8 +251,6 @@ bool Node_schedule(se::State& state)
     return true;
 }
 
-SE_FUNCTION(Node_schedule);
-
 
 bool Node_unschedule(se::State& state)
 {
@@ -320,7 +276,6 @@ bool Node_unschedule(se::State& state)
     return true;
 }
 
-SE_FUNCTION(Node_unschedule);
 
 bool Node_set_x(se::State& state)
 {
@@ -331,7 +286,6 @@ bool Node_set_x(se::State& state)
     return true;
 }
 
-SE_SET_PROPERTY(Node_set_x)
 
 bool Node_get_x(se::State& state)
 {
@@ -340,7 +294,6 @@ bool Node_get_x(se::State& state)
     return true;
 }
 
-SE_GET_PROPERTY(Node_get_x)
 
 bool Node_set_y(se::State& state)
 {
@@ -350,7 +303,6 @@ bool Node_set_y(se::State& state)
     thiz->setPositionY(y);
     return true;
 }
-SE_SET_PROPERTY(Node_set_y)
 
 bool Node_get_y(se::State& state)
 {
@@ -359,32 +311,19 @@ bool Node_get_y(se::State& state)
     return true;
 }
 
-SE_GET_PROPERTY(Node_get_y)
-
-bool jsb_register_Node()
-{
-    auto cls = se::Class::create("Node", __ccObj, nullptr, _SE(Node_constructor));
-    cls->defineStaticFunction("create", _SE(Node_create));
-
-    cls->defineProperty("x", _SE(Node_get_x), _SE(Node_set_x));
-    cls->defineProperty("y", _SE(Node_get_y), _SE(Node_set_y));
-
-    cls->defineFunction("ctor", _SE(Node_ctor));
-    cls->defineFunction("onEnter", _SE(Node_onEnter));
-    cls->defineFunction("onExit", _SE(Node_onExit));
-    cls->defineFunction("onEnterTransitionDidFinish", _SE(Node_onEnterTransitionDidFinish));
-    cls->defineFunction("onExitTransitionDidStart", _SE(Node_onExitTransitionDidStart));
-    cls->defineFunction("cleanup", _SE(Node_cleanup));
-    cls->defineFunction("schedule", _SE(Node_schedule));
-    cls->defineFunction("unschedule", _SE(Node_unschedule));
-
-    cls->defineFunction("addChild", _SE(Node_addChild));
-    cls->defineFinalizedFunction(_SE(Node_finalized));
-
-    cls->install();
-
-    __jsb_Node_proto = cls->getProto();
-    __jsb_Node_class = cls;
-
-    return true;
-}
+SE_MODULE_REGISTER_BEGIN(Node)
+//============Function Declare begin==========================
+SE_CTOR_EX("ctor", Node_ctor, Node)
+SE_STATIC_FUNC("create", Node_create)
+SE_PROPERTY("x", Node_get_x, Node_set_x)
+SE_PROPERTY("y", Node_get_y, Node_set_y)
+SE_FUNC("onEnter", Node_onEnter)
+SE_FUNC("onExit", Node_onExit)
+SE_FUNC("onEnterTransitionDidFinish", Node_onEnterTransitionDidFinish);
+SE_FUNC("onExitTransitionDidStart", Node_onExitTransitionDidStart);
+SE_FUNC("cleanup", Node_cleanup);
+SE_FUNC("schedule", Node_schedule);
+SE_FUNC("unschedule", Node_unschedule);
+SE_FUNC("addChild", Node_addChild);
+//============Function Declare end==========================
+SE_MODULE_REGISTER_END(Node)
